@@ -236,7 +236,7 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl font-bold text-primary mb-4">
-              Mentores 2026.1
+              Docentes 2026.1
             </h2>
             <p className="text-foreground/60 text-lg">
               Excelência acadêmica e prática de mercado
