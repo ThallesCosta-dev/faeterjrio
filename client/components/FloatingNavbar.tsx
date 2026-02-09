@@ -33,13 +33,11 @@ export function FloatingNavbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-            <div
-              className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold transition-all ${
-                scrolled ? "bg-primary text-white" : "bg-white/20 text-white"
-              }`}
-            >
-              F
-            </div>
+            <img
+              src="/android-chrome-512x512.png"
+              alt="Logo"
+              className="w-8 h-8 rounded-lg"
+            />
             <span
               className={`transition-colors ${
                 scrolled ? "text-primary" : "text-white"
