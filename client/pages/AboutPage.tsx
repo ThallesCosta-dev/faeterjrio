@@ -70,14 +70,6 @@ export default function AboutPage() {
             "Responsável pela base técnica dos alunos, focando em Fundamentos de Algoritmos e Programação Estruturada.",
           lattes: "http://lattes.cnpq.br/3678346219962811",
         },
-        {
-          name: "Prof. Paulo Massillon Martins",
-          subjects: ["DEV", "ENG"],
-          role: "Desenvolvimento de Sistemas",
-          description:
-            "Professor atuante na área de desenvolvimento de software e tecnologias aplicadas.",
-          lattes: "http://lattes.cnpq.br/3176613789527496",
-        },
       ],
     },
     {
@@ -265,18 +257,6 @@ export default function AboutPage() {
                           {member.name}
                         </h4>
 
-                        {member.lattes && (
-                          <a
-                            href={member.lattes}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-1 text-xs text-primary/70 hover:text-primary mb-2 transition-colors"
-                          >
-                            <ExternalLink className="w-3 h-3" />
-                            Currículo Lattes
-                          </a>
-                        )}
-                        
                         {/* Tags de Matérias */}
                         <div className="flex flex-wrap justify-center gap-2 mb-3">
                           {member.subjects.map((subject) => (
@@ -292,9 +272,23 @@ export default function AboutPage() {
                         <p className="text-sm font-semibold text-foreground/80 mb-3 uppercase tracking-wide">
                           {member.role}
                         </p>
-                        <p className="text-sm text-foreground/60 leading-relaxed">
+                        <p className="text-sm text-foreground/60 leading-relaxed mb-4">
                           {member.description}
                         </p>
+
+                        {member.lattes && (
+                          <div className="mt-auto pt-4 border-t border-border/50">
+                            <a
+                              href={member.lattes}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors py-1 px-3 bg-primary/5 rounded-full hover:bg-primary/10"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              Currículo Lattes
+                            </a>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   ))}
