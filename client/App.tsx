@@ -11,7 +11,6 @@ import { Footer } from "./components/Footer";
 import { PlaceholderPage } from "./components/PlaceholderPage";
 import Index from "./pages/Index";
 import MatrizEmentas from "./pages/MatrizEmentas";
-import CentralAtendimento from "./pages/CentralAtendimento";
 import AdmissionPage from "./pages/AdmissionPage";
 import AboutPage from "./pages/AboutPage";
 import LoginCoruja from "./pages/LoginCoruja";
@@ -53,14 +52,6 @@ const App = () => (
             element={
               <Layout>
                 <MatrizEmentas />
-              </Layout>
-            }
-          />
-          <Route
-            path="/central-atendimento"
-            element={
-              <Layout>
-                <CentralAtendimento />
               </Layout>
             }
           />

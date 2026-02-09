@@ -18,7 +18,17 @@ export function FloatingNavbar() {
   const menuItems = [
     { label: "Institucional", href: "/about" },
     { label: "Ingresso", href: "/admission" },
-    { label: "Contato", href: "/contact" },
+    { label: "Ementas", href: "/matriz-ementas" },
+    {
+      label: "Central de Atendimento",
+      href: "https://faeterj-rio.edu.br/central/",
+      external: true,
+    },
+    {
+      label: "Estágio",
+      href: "https://docs.google.com/forms/d/e/1FAIpQLScS4E8iq0V2YiGA0ygjsBciCM9AIr7ptzhesl7GDIlwtOi_JA/viewform",
+      external: true,
+    },
   ];
 
   return (
@@ -49,19 +59,35 @@ export function FloatingNavbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  scrolled
-                    ? "text-foreground hover:text-primary"
-                    : "text-white/90 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {menuItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-sm font-medium transition-colors ${
+                    scrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-white/90 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors ${
+                    scrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-white/90 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </div>
 
           {/* CTA Button */}
@@ -103,20 +129,37 @@ export function FloatingNavbar() {
                 : "border-white/20 bg-primary/95"
             }`}
           >
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                className={`block px-4 py-3 text-sm font-medium transition-colors ${
-                  scrolled
-                    ? "text-foreground hover:text-primary hover:bg-secondary"
-                    : "text-white hover:bg-white/10"
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {menuItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                    scrolled
+                      ? "text-foreground hover:text-primary hover:bg-secondary"
+                      : "text-white hover:bg-white/10"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                    scrolled
+                      ? "text-foreground hover:text-primary hover:bg-secondary"
+                      : "text-white hover:bg-white/10"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
             <a
               href="https://faeterj-rio.edu.br/coruja/autenticar/login_controle.php"
               target="_blank"
