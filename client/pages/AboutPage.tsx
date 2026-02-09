@@ -1,40 +1,36 @@
 import { motion } from "framer-motion";
-import { User, BookOpen, Code, Cpu, Users } from "lucide-react";
+import { User, BookOpen, Code, Cpu, Users, ExternalLink } from "lucide-react";
 
 export default function AboutPage() {
-  // Dados atualizados (Fonte: Snippet 2)
+  // Dados atualizados (Fonte: Lattes/CNPq)
   const faculty = [
     {
       area: "Gestão, Inovação e Ciência de Dados",
       icon: <Users className="w-8 h-8 text-primary" />,
       members: [
         {
-          name: "Dr. Alfredo Boente",
+          name: "Prof. Alfredo Nazareno Pereira Boente",
           subjects: ["ADS", "UBD", "SEG"],
-          role: "Gestão de TI & Segurança.",
+          role: "Gestão de TI & Segurança",
           description:
             "Doutor em Engenharia de Produção (COPPE/UFRJ). Especialista em administração de dados, segurança da informação e lógica fuzzy aplicada à gestão.",
+          lattes: "http://lattes.cnpq.br/7741044822342404",
         },
         {
-          name: "MSc. Ricardo Marciano",
+          name: "Prof. Ricardo Marciano dos Santos",
           subjects: ["IAS", "CAW", "PJS"],
           role: "Análise de Sistemas",
           description:
             "Pós-doutorando em Aprendizado de Máquina na Fiocruz. Foca em construção de algoritmos web e projetos de sistemas inteligentes.",
+          lattes: "http://lattes.cnpq.br/6329550960331880",
         },
         {
-          name: "Dr. Vinícius Marques",
-          subjects: ["REQ", "MOD", "UBD"],
-          role: "Engenharia de Software.",
-          description:
-            "Doutor em HCTE/UFRJ. Especialista em Engenharia de Requisitos, Modelagem de Sistemas complexos e Uso de Banco de Dados.",
-        },
-        {
-          name: "Nelson",
+          name: "Prof. Nelson Luis Soares Bezerra",
           subjects: ["MPA", "GPS", "EMP"],
-          role: "Gestão Ágil de Projetos.",
+          role: "Gestão Ágil de Projetos",
           description:
             "Foco em Metodologias Ágeis (Scrum/Kanban), Gerência de Projetos de Software e Empreendedorismo Tecnológico.",
+          lattes: "http://lattes.cnpq.br/9574913471960359",
         },
       ],
     },
@@ -43,46 +39,44 @@ export default function AboutPage() {
       icon: <Code className="w-8 h-8 text-primary" />,
       members: [
         {
-          name: "André Neves",
+          name: "Prof. André Henrique Pedrosa Neves",
           subjects: ["DAW", "IHM", "SBD"],
-          role: "Full Stack & Frontend.",
+          role: "Full Stack & Frontend",
           description:
             "Especialista em Desenvolvimento Web, Interfaces (UI/UX) e Scripts de Banco de Dados.",
+          lattes: "http://lattes.cnpq.br/9609477928978984",
         },
         {
-          name: "Alexandre Louzada",
-          subjects: ["POB", "SBD", "TFC"],
-          role: "Backend & Coordenação.",
-          description:
-            "Mestre em Informática (UFRJ). Foca em Programação Orientada a Objetos e coordena os Trabalhos Finais de Curso.",
-        },
-        {
-          name: "Marcio Belo",
+          name: "Prof. Marcio Belo Rodrigues da Silva",
           subjects: ["REQ", "MOD", "POB"],
-          role: "Arquitetura de Software.",
+          role: "Arquitetura de Software",
           description:
             "Especialista em Análise e Modelagem. Ensina os fundamentos da Orientação a Objetos e estruturas de requisitos.",
+          lattes: "http://lattes.cnpq.br/4659414483766533",
         },
         {
-          name: "Miguel",
-          subjects: ["POA", "PDM", "TAV"],
-          role: "Mobile & Java Avançado.",
-          description:
-            "Especialista em ecossistema Java e desenvolvimento nativo/híbrido para dispositivos móveis (Android/iOS).",
-        },
-        {
-          name: "Leonardo",
-          subjects: ["FAC", "FPR"],
-          role: "Lógica de Programação.",
-          description:
-            "Responsável pela base técnica dos alunos, focando em Fundamentos de Algoritmos e Programação Estruturada.",
-        },
-        {
-          name: "Claudia Ferlin",
+          name: "Prof(a). Claudia Ferlin",
           subjects: ["ESD", "FAC"],
-          role: "Estruturas & Algoritmos.",
+          role: "Estruturas & Algoritmos",
           description:
             "Atua no ensino de Estruturas de Dados complexas e nos Fundamentos de Algoritmos computacionais.",
+          lattes: "http://lattes.cnpq.br/4781864789335595",
+        },
+        {
+          name: "Prof. Leonardo Soares Vianna",
+          subjects: ["FAC", "FPR"],
+          role: "Lógica de Programação",
+          description:
+            "Responsável pela base técnica dos alunos, focando em Fundamentos de Algoritmos e Programação Estruturada.",
+          lattes: "http://lattes.cnpq.br/3678346219962811",
+        },
+        {
+          name: "Prof. Paulo Massillon Martins",
+          subjects: ["DEV", "ENG"],
+          role: "Desenvolvimento de Sistemas",
+          description:
+            "Professor atuante na área de desenvolvimento de software e tecnologias aplicadas.",
+          lattes: "http://lattes.cnpq.br/3176613789527496",
         },
       ],
     },
@@ -91,32 +85,28 @@ export default function AboutPage() {
       icon: <Cpu className="w-8 h-8 text-primary" />,
       members: [
         {
-          name: "Paulo Galhanone",
+          name: "Prof. Paulo Ricardo Galhanone",
           subjects: ["ORG", "SOP"],
           role: "Hardware & S.O.",
           description:
             "Especialista em Arquitetura de Computadores (Von Neumann) e funcionamento interno de Sistemas Operacionais.",
+          lattes: "http://lattes.cnpq.br/9169990426085895",
         },
         {
-          name: "Maria Claudia",
+          name: "Prof. Maria Cláudia Roenick Guimarães",
           subjects: ["RSD", "SEG", "PBD"],
-          role: "Redes & CyberSec.",
+          role: "Redes & CyberSec",
           description:
             "Foca em Redes de Computadores, protocolos de comunicação e Segurança da Informação corporativa.",
+          lattes: "http://lattes.cnpq.br/9020338574975132",
         },
         {
-          name: "Wagner Zanco",
-          subjects: ["MAB", "CAL", "ALG"],
-          role: "Ciências Exatas.",
-          description:
-            "Doutor com foco em Física e Matemática. Ministra as bases de Cálculo e Álgebra para computação.",
-        },
-        {
-          name: "Cláudio Bispo",
+          name: "Prof. Cláudio Bispo de Jesus da Costa",
           subjects: ["MAC", "ALG", "EST"],
-          role: "Matemática Computacional.",
+          role: "Matemática Computacional",
           description:
             "Mestre em Ensino de Matemática. Atua com Estatística aplicada a dados e Álgebra Linear.",
+          lattes: "http://lattes.cnpq.br/3412930630193167",
         },
       ],
     },
@@ -125,25 +115,28 @@ export default function AboutPage() {
       icon: <BookOpen className="w-8 h-8 text-primary" />,
       members: [
         {
-          name: "Eduardo Barreto",
+          name: "Prof. Eduardo José Paz Ferreira Barreto",
           subjects: ["LPO", "LES"],
-          role: "Comunicação Técnica.",
+          role: "Comunicação Técnica",
           description:
             "Foca em Língua Portuguesa para relatórios técnicos e Inglês Instrumental (Leitura e Escrita Técnica).",
+          lattes: "http://lattes.cnpq.br/2645169295668249",
         },
         {
-          name: "Profa. Rute",
+          name: "Prof(a). Rute Candida de Freitas",
           subjects: ["TPH", "MET"],
-          role: "Soft Skills & Pesquisa.",
+          role: "Soft Skills & Pesquisa",
           description:
-            "Responsável por Técnicas e Paradigmas Humanos (Ética/Comportamento) e Metodologia da Pesquisa Científica (Manhã).",
+            "Responsável por Técnicas e Paradigmas Humanos (Ética/Comportamento) e Metodologia da Pesquisa Científica.",
+          lattes: "http://lattes.cnpq.br/6650697754677674",
         },
         {
-          name: "Profa. Rosângela",
+          name: "Prof(a). Rosangela de Sena Almeida",
           subjects: ["TPH", "MET"],
-          role: "Soft Skills & Pesquisa.",
+          role: "Soft Skills & Pesquisa",
           description:
-            "Responsável por Técnicas e Paradigmas Humanos (Ética/Comportamento) e Metodologia da Pesquisa Científica (Noite).",
+            "Responsável por Técnicas e Paradigmas Humanos e Coordenação de Atividades Complementares.",
+          lattes: "http://lattes.cnpq.br/4932401660106541",
         },
       ],
     },
@@ -267,14 +260,22 @@ export default function AboutPage() {
                       whileHover={{ y: -5 }}
                       className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-border h-full flex flex-col"
                     >
-                      <div className="w-20 h-20 bg-secondary rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden shrink-0">
-                        <User className="w-10 h-10 text-primary/40" />
-                      </div>
-                      
                       <div className="text-center mb-4 flex-grow">
                         <h4 className="font-bold text-lg text-primary mb-1">
                           {member.name}
                         </h4>
+
+                        {member.lattes && (
+                          <a
+                            href={member.lattes}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-1 text-xs text-primary/70 hover:text-primary mb-2 transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            Currículo Lattes
+                          </a>
+                        )}
                         
                         {/* Tags de Matérias */}
                         <div className="flex flex-wrap justify-center gap-2 mb-3">
