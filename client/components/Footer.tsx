@@ -3,9 +3,7 @@ import {
   Mail,
   MapPin,
   Clock,
-  Github,
   Linkedin,
-  Twitter,
 } from "lucide-react";
 
 export function Footer() {
@@ -90,25 +88,13 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
+                href="https://www.linkedin.com/school/faeterj-rio/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -122,7 +108,7 @@ export function Footer() {
               do Rio de Janeiro.
             </p>
             <p className="text-xs">
-              Desenvolvido com tecnologia FAETERJ-Rio | CNPJ: 31.608.763/0001-43
+              Desenvolvido por Thalles Costa
             </p>
           </div>
         </div>

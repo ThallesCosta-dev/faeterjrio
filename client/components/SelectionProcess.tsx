@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 
 export function SelectionProcess() {
   return (
-    <section className="py-12 md:py-20 bg-secondary/30" id="processo-seletivo">
+    <section className="py-8 md:py-16 bg-secondary/30" id="processo-seletivo">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

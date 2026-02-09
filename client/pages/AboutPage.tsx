@@ -183,51 +183,43 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="space-y-8 text-lg text-foreground/80 leading-relaxed text-left">
-              <p>
-                A FAETERJ-Rio (Faculdade de Educação Tecnológica do Estado do Rio
-                de Janeiro) é uma instituição de ensino superior pública,
-                gratuita e de excelência, vinculada à rede FAETEC e à Secretaria
-                de Ciência, Tecnologia e Inovação (SECTI).
-              </p>
-              
-              <div className="bg-secondary/30 p-8 rounded-2xl border border-primary/10 my-8">
-                 <p className="text-sm text-foreground/70 italic border-l-4 border-primary pl-4">
-                  Grade curricular ativa referente ao semestre letivo <strong>2026.1</strong>. 
-                  As siglas das disciplinas seguem o Ementário Oficial 2018 (ex: <strong>PJS</strong> = Projeto de Sistemas).
+            <div className="space-y-12 text-lg text-foreground/80 leading-relaxed text-left">
+              <h2 className="text-3xl font-bold text-primary text-center">
+                De IST-Rio a Referência em Tecnologia: Nossa Jornada
+              </h2>
+
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-primary">A Origem</h3>
+                <p>
+                  A história da FAETERJ Rio (Faculdade de Educação Tecnológica do Estado do Rio de Janeiro) começa com um propósito claro: suprir a demanda urgente por mão de obra qualificada em tecnologia no estado. Nascida como IST-Rio (Instituto Superior de Tecnologia), a instituição foi desenhada desde o primeiro dia para ser diferente das universidades tradicionais. Aqui, a teoria sempre serviu à prática.
                 </p>
               </div>
 
-              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm my-12">
-                <h3 className="text-xl font-bold text-primary mb-6">
-                  Nossos Pilares
-                </h3>
-                <ul className="space-y-4 text-base">
-                  <li className="flex gap-4">
-                    <span className="font-bold text-primary min-w-[140px]">
-                      Acessibilidade:
-                    </span>
-                    <span>
-                      Ensino 100% gratuito, com ingresso meritocrático via SISU.
-                    </span>
-                  </li>
-                  <li className="flex gap-4">
-                    <span className="font-bold text-primary min-w-[140px]">
-                      Empregabilidade:
-                    </span>
-                    <span>
-                      Currículo vivo, atualizado para atender demandas de Big Techs e setor público.
-                    </span>
-                  </li>
-                  <li className="flex gap-4">
-                    <span className="font-bold text-primary min-w-[140px]">
-                      Corpo Docente:
-                    </span>
-                    <span>
-                      Mestres e Doutores que atuam em posições de liderança no mercado e na pesquisa.
-                    </span>
-                  </li>
-                </ul>
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-primary">A Evolução</h3>
+                <p>
+                  Vinculada à FAETEC e à Secretaria de Ciência, Tecnologia e Inovação (SECTI), a faculdade evoluiu sua grade e infraestrutura para acompanhar a velocidade exponencial da computação. Do mainframe ao Cloud Computing, da lógica estruturada à Inteligência Artificial, a FAETERJ Rio adaptou-se a cada era tecnológica sem perder sua essência: o ensino público, gratuito e meritocrático.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-primary">O Diferencial: Sala de Aula ou Mercado?</h3>
+                <p>
+                  Nosso maior orgulho não é apenas o diploma, mas a empregabilidade. Com um corpo docente formado por Mestres e Doutores que atuam ativamente no mercado (em Big Techs, órgãos públicos e centros de pesquisa como a Fiocruz), o aluno não aprende apenas a programar — aprende a resolver problemas reais.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-primary">Hoje</h3>
+                <p>
+                  Atualmente, a FAETERJ Rio é sinônimo de excelência no curso de Análise e Desenvolvimento de Sistemas. Somos uma comunidade vibrante de desenvolvedores, gestores e cientistas de dados. Nossos egressos (Alumni) ocupam posições de liderança em multinacionais e startups, provando que o ensino técnico público do Rio de Janeiro é uma potência de inovação.
+                </p>
+              </div>
+
+              <div className="bg-secondary/30 p-8 rounded-2xl border border-primary/10 my-8">
+                <p className="text-sm text-foreground/70 italic border-l-4 border-primary pl-4">
+                  Grade curricular ativa referente ao semestre letivo <strong>2026.1</strong>. As siglas das disciplinas seguem o Ementário Oficial 2018 (ex: <strong>PJS</strong> = Projeto de Sistemas).
+                </p>
               </div>
             </div>
           </motion.div>
