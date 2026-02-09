@@ -1,0 +1,42 @@
+.ticker {
+  overflow: hidden;
+  background: white;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.ticker-content {
+  display: flex;
+  animation: scroll-left 40s linear infinite;
+  gap: 0;
+}
+
+.ticker-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 0px));
+  }
+}
+
+/* For smooth continuous scrolling */
+.ticker-content {
+  will-change: transform;
+}

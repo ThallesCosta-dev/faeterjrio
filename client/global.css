@@ -1,0 +1,171 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * FAETERJ-Rio Institutional theme with Ivy League Tech aesthetic
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 43% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 43% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 43% 20%;
+
+    /* Institutional Blue #304a83 */
+    --primary: 215 43% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 20% 95%;
+    --secondary-foreground: 215 43% 35%;
+
+    --muted: 215 15% 88%;
+    --muted-foreground: 215 15% 45%;
+
+    --accent: 215 43% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 20% 92%;
+    --input: 215 20% 92%;
+    --ring: 215 43% 35%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 215 43% 20%;
+    --sidebar-primary: 215 43% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 20% 95%;
+    --sidebar-accent-foreground: 215 43% 35%;
+    --sidebar-border: 215 20% 92%;
+    --sidebar-ring: 215 43% 35%;
+  }
+
+  .dark {
+    --background: 215 43% 15%;
+    --foreground: 0 0% 95%;
+
+    --card: 215 43% 20%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 215 43% 20%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 215 60% 50%;
+    --primary-foreground: 215 43% 15%;
+
+    --secondary: 215 30% 30%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 215 30% 35%;
+    --muted-foreground: 215 15% 70%;
+
+    --accent: 215 60% 50%;
+    --accent-foreground: 215 43% 15%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 30% 30%;
+    --input: 215 30% 30%;
+    --ring: 215 60% 50%;
+    --sidebar-background: 215 43% 15%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 215 60% 50%;
+    --sidebar-primary-foreground: 215 43% 15%;
+    --sidebar-accent: 215 30% 30%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 215 30% 30%;
+    --sidebar-ring: 215 60% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    line-height: 1.2;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold;
+    line-height: 1.3;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-bold;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-bold;
+  }
+
+  :where(p, span, li, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@layer components {
+  /* Soft shadow for depth */
+  .shadow-soft {
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.07),
+      0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-soft-lg {
+    box-shadow:
+      0 10px 15px rgba(0, 0, 0, 0.08),
+      0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Duotone blue overlay for hero */
+  .duotone-overlay {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      rgba(48, 74, 131, 0.95) 0%,
+      rgba(48, 74, 131, 0.85) 100%
+    );
+  }
+}
