@@ -64,20 +64,6 @@ export function SelectionProcess() {
                     <strong className="text-foreground">Lista de Espera:</strong> 29/01 a 02/02/2026
                   </p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-                  <p>
-                    <strong className="text-foreground">Matrícula da Chamada Regular:</strong> A
-                    partir de 02/02/2026
-                  </p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-                  <p>
-                    <strong className="text-foreground">Matrícula da 1ª Lista de Espera:</strong>{" "}
-                    24/02/2026
-                  </p>
-                </div>
               </div>
             </div>
 
@@ -85,18 +71,50 @@ export function SelectionProcess() {
             <div className="bg-blue-50 border-l-4 border-primary p-6 rounded-r-lg">
               <div className="flex items-start gap-4">
                 <AlertCircle className="w-6 h-6 text-primary mt-1 shrink-0" />
+                <div className="text-primary/90 space-y-2">
+                  <p className="font-medium">
+                    <strong className="text-primary">
+                      1ª Convocação da Lista de Espera- SISU/2026- 1º e 2º Semestre:
+                    </strong>
+                  </p>
+                  <ul className="space-y-1 ml-1">
+                    <li>
+                      <strong>Período de Matrícula:</strong> 23/02 e 24/02/2026
+                    </li>
+                    <li>
+                      <strong>Horário:</strong> das 10 às 18h
+                    </li>
+                    <li>
+                      <strong>Local:</strong> Secretaria da FAETERJ-Rio.
+                    </li>
+                  </ul>
+
+                  <div className="pt-3">
+                    <a
+                      href="https://drive.google.com/drive/folders/1g6iPVx-XNuOVgjEDN-tPoKCM4UmD9VB3?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3 p-4 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                    >
+                      <CheckCircle2 className="w-5 h-5 text-white/90" />
+                      <span className="font-medium">Ver Lista de Convocados</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border-l-4 border-primary p-6 rounded-r-lg">
+              <div className="flex items-start gap-4">
+                <AlertCircle className="w-6 h-6 text-primary mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-lg text-primary mb-3">
-                    IMPORTANTE:
+                    IMPORTANTE - Chamada Regular:
                   </h4>
-                  <div className="text-primary/90 space-y-2">
-                    <p className="font-medium">
-                      Chamada Regular do SISU/2026 - 1º e 2º Semestre:
-                    </p>
+                  <div className="text-primary/90">
                     <ul className="space-y-1 ml-1">
                       <li>
-                        <strong>Período de Matrícula:</strong> 02/02 a
-                        06/02/2026
+                        <strong>Período de Matrícula:</strong> 02/02 a 06/02/2026
                       </li>
                       <li>
                         <strong>Horário:</strong> das 10 às 18h

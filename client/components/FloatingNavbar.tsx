@@ -16,6 +16,7 @@ export function FloatingNavbar() {
   }, []);
 
   const menuItems = [
+    { label: "Início", href: "/" },
     { label: "Institucional", href: "/about" },
     { label: "Ingresso", href: "/admission" },
     { label: "Ementas", href: "/matriz-ementas" },
