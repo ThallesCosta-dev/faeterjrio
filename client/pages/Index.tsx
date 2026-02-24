@@ -4,6 +4,7 @@ import { SelectionProcess } from "@/components/SelectionProcess";
 import { WhyFAETERJ } from "@/components/WhyFAETERJ";
 import { CoursesSection } from "@/components/CoursesSection";
 import { SocialProof } from "@/components/SocialProof";
+import { PostsCarousel } from "@/components/PostsCarousel";
 import { ArrowRight } from "lucide-react";
 
 export default function Index() {
@@ -14,6 +15,9 @@ export default function Index() {
 
       {/* Quick Access Dock */}
       <AccessDock />
+
+      {/* Posts Carousel - Comunicados Recentes */}
+      <PostsCarousel />
 
       {/* Selection Process 2026 */}
       <SelectionProcess />

@@ -44,6 +44,14 @@ export function Footer() {
                   Matriz e Ementas
                 </a>
               </li>
+              <li>
+                <a
+                  href="/admin/login"
+                  className="text-white/50 hover:text-white/80 transition-colors text-xs"
+                >
+                  Área Administrativa
+                </a>
+              </li>
             </ul>
           </div>
 
