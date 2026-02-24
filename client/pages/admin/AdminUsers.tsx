@@ -103,6 +103,7 @@ export default function AdminUsers() {
       let query = supabase
         .from('profiles')
         .select('*', { count: 'exact' })
+        .eq('is_active', true) // Apenas usuários ativos
         .order('created_at', { ascending: false })
         .range(currentPage * USERS_PER_PAGE, (currentPage + 1) * USERS_PER_PAGE - 1);
 
@@ -112,11 +113,18 @@ export default function AdminUsers() {
 
       const { data, error, count } = await query;
 
-      if (error) throw error;
+      if (error) {
+        console.error('Erro na query de usuários:', error);
+        throw error;
+      }
+
+      console.log('Usuários ativos encontrados:', data?.length || 0);
+      console.log('Total count (ativos):', count);
 
       setUsers(data || []);
       setTotalCount(count || 0);
     } catch (err: any) {
+      console.error('Erro completo ao carregar usuários:', err);
       toast.error('Erro ao carregar usuários: ' + err.message);
     } finally {
       setLoading(false);
@@ -156,31 +164,82 @@ export default function AdminUsers() {
         },
       });
 
-      if (authError) throw authError;
+      if (authError) {
+        console.error('Erro na criação do usuário auth:', authError);
+        throw authError;
+      }
 
       if (authData.user) {
-        // 2. Update profile with additional data
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .update({
-            full_name: formData.full_name,
-            cpf: formattedCpf,
-            institutional_email: formData.institutional_email,
-            department: formData.department,
-            phone: formattedPhone,
-            role: formData.role,
-            is_active: formData.is_active,
-          })
-          .eq('id', authData.user.id);
+        // 2. Esperar um pouco para garantir que o usuário auth foi criado
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
-        if (profileError) throw profileError;
+        // 3. Tentar criar/atualizar o profile com retry
+        let retries = 3;
+        let profileError = null;
+        
+        while (retries > 0) {
+          // Primeiro tentar UPDATE (caso o trigger tenha criado)
+          const { error: updateError } = await supabase
+            .from('profiles')
+            .update({
+              full_name: formData.full_name,
+              cpf: formattedCpf,
+              institutional_email: formData.institutional_email,
+              department: formData.department,
+              phone: formattedPhone,
+              role: formData.role,
+              is_active: formData.is_active,
+            })
+            .eq('id', authData.user.id);
+
+          if (!updateError) {
+            profileError = null;
+            break;
+          }
+          
+          // Se UPDATE falhar, tentar INSERT
+          if (updateError && updateError.code === 'PGRST116') {
+            const { error: insertError } = await supabase
+              .from('profiles')
+              .insert({
+                id: authData.user.id,
+                full_name: formData.full_name,
+                cpf: formattedCpf,
+                institutional_email: formData.institutional_email,
+                department: formData.department,
+                phone: formattedPhone,
+                role: formData.role,
+                is_active: formData.is_active,
+              });
+
+            if (!insertError) {
+              profileError = null;
+              break;
+            }
+            profileError = insertError;
+          } else {
+            profileError = updateError;
+          }
+          
+          console.log(`Tentativa ${4 - retries} falhou, tentando novamente...`);
+          retries--;
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+        if (profileError) {
+          console.error('Erro ao criar/atualizar profile após várias tentativas:', profileError);
+          throw new Error(`Erro ao criar profile: ${profileError.message}`);
+        }
 
         toast.success('Usuário criado com sucesso!');
         setIsDialogOpen(false);
         resetForm();
         fetchUsers();
+      } else {
+        throw new Error('Usuário não foi criado no sistema de autenticação');
       }
     } catch (err: any) {
+      console.error('Erro completo ao criar usuário:', err);
       toast.error('Erro ao criar usuário: ' + err.message);
     }
   };
@@ -233,18 +292,17 @@ export default function AdminUsers() {
     if (!deleteId) return;
 
     try {
-      // No client podemos apenas desativar o usuário via profile.
-      // A exclusão completa em auth.users deve ser feita pelo dashboard do Supabase.
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({ is_active: false })
-        .eq('id', deleteId);
+      // Excluir usuário completamente do banco
+      const { error } = await supabase.rpc('delete_user_completely', {
+        user_id: deleteId
+      });
 
-      if (updateError) throw updateError;
+      if (error) throw error;
       
-      toast.success('Usuário desativado com sucesso!');
+      toast.success('Usuário excluído permanentemente!');
       fetchUsers();
     } catch (err: any) {
+      console.error('Erro ao excluir usuário:', err);
       toast.error('Erro ao excluir usuário: ' + err.message);
     } finally {
       setDeleteId(null);

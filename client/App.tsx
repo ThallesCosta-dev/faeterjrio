@@ -133,7 +133,6 @@ const App = () => (
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="editor" element={<AdminEditor />} />
             <Route path="users" element={<AdminUsers />} />
-            <Route index element={<AdminDashboard />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route

@@ -39,11 +39,11 @@ FROM auth.users au
 WHERE au.email = 'thalles.24104708360068@faeterj-rio.edu.br'
 ON CONFLICT (id) DO UPDATE 
 SET 
-    full_name = 'Thalles Costa de Souza',
-    cpf = '123.456.789-00',
+    full_name = 'Thalles Costa',
+    cpf = '114.861.817-16',
     institutional_email = 'thalles.24104708360068@faeterj-rio.edu.br',
     personal_email = 'costa.thalles71@gmail.com',
-    phone = '(21) 98765-4321',
+    phone = '(21) 99681-8038',
     department = 'Tecnologia da Informação',
     registration_number = '24104708360068',
     course = 'CST em Sistemas de Computação',
@@ -69,29 +69,29 @@ INSERT INTO public.profiles (
 )
 SELECT 
     au.id,
-    'Thalles Costa',
-    '987.654.321-00',
-    'costa.thalles71@gmail.com',
-    'costa.thalles71@gmail.com',
-    '(21) 91234-5678',
+    'Ricardo Marciano',
+    '111.222.333-44',
+    'ricardo.marciano@faeterj-rio.edu.br',
+    'ricardo.marciano@faeterj-rio.edu.br',
+    '(21) 95555-4444',
     'Administração',
-    '202500001',
+    '202500002',
     'CST em Gestão de TI',
     'admin',
     true,
     NOW(),
     NOW()
 FROM auth.users au
-WHERE au.email = 'costa.thalles71@gmail.com'
+WHERE au.email = 'ricardo.marciano@faeterj-rio.edu.br'
 ON CONFLICT (id) DO UPDATE 
 SET 
-    full_name = 'Thalles Costa',
-    cpf = '987.654.321-00',
-    institutional_email = 'costa.thalles71@gmail.com',
-    personal_email = 'costa.thalles71@gmail.com',
-    phone = '(21) 91234-5678',
+    full_name = 'Ricardo Marciano',
+    cpf = '111.222.333-44',
+    institutional_email = 'ricardo.marciano@faeterj-rio.edu.br',
+    personal_email = 'ricardo.marciano@faeterj-rio.edu.br',
+    phone = '(21) 95555-4444',
     department = 'Administração',
-    registration_number = '202500001',
+    registration_number = '202500002',
     course = 'CST em Gestão de TI',
     role = 'admin',
     is_active = true,

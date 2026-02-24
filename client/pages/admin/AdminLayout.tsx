@@ -33,21 +33,27 @@ export default function AdminLayout() {
   }
 
   // Redirecionar baseado no role
+  if (loading || !role) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+  
   if (role === 'viewer') {
-    console.log('AdminLayout - Role viewer, redirecionando para home');
     return <Navigate to="/" replace />;
   }
 
-  // Redirecionar admin para dashboard se não estiver em página específica
-  if (role === 'admin' && window.location.pathname === '/admin') {
-    console.log('AdminLayout - Admin redirecionado para dashboard');
+  // Redirecionar baseado no path atual
+  const currentPath = window.location.pathname;
+  
+  if (role === 'admin' && currentPath === '/admin') {
     return <Navigate to="/admin/dashboard" replace />;
   }
 
-  // Redirecionar editor para editor se não estiver em página específica
-  if (role === 'editor' && window.location.pathname === '/admin') {
-    console.log('AdminLayout - Editor redirecionado para editor');
-    return <Navigate to="/admin/editor" replace />;
+  if (role === 'editor' && currentPath === '/admin') {
+    return <Navigate to="/admin/dashboard" replace />;
   }
 
   return (

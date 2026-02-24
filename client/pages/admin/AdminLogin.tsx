@@ -37,9 +37,8 @@ export default function AdminLogin() {
         throw error;
       }
 
-      console.log('Login sucesso! Data:', data);
-      console.log('Navegando para /admin/dashboard...');
-      navigate('/admin/dashboard');
+      // Deixar o AdminLayout decidir o redirecionamento com base na role
+      navigate('/admin');
     } catch (err: any) {
       // Tratamento específico para erros comuns
       let errorMessage = err.message || 'Erro ao fazer login. Verifique suas credenciais.';
