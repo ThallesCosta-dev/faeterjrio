@@ -17,7 +17,7 @@ export default function AdminSidebar({ profile, role, canManageUsers, onLogout }
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white flex flex-col h-screen sticky top-0">
+    <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-white/10">
         <div className="flex items-center gap-3 mb-4">
