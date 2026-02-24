@@ -41,6 +41,12 @@ export function Header() {
               Cursos
             </Link>
             <Link
+              to="/comunicados"
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Comunicados
+            </Link>
+            <Link
               to="/contact"
               className="text-sm font-medium text-foreground hover:text-primary transition-colors"
             >
@@ -85,6 +91,13 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Cursos
+            </Link>
+            <Link
+              to="/comunicados"
+              className="px-3 py-2 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Comunicados
             </Link>
             <Link
               to="/contact"

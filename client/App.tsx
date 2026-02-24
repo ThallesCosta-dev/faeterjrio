@@ -15,6 +15,14 @@ import AdmissionPage from "./pages/AdmissionPage";
 import AboutPage from "./pages/AboutPage";
 import LoginCoruja from "./pages/LoginCoruja";
 import NotFound from "./pages/NotFound";
+import ComunicadosPage from "./pages/ComunicadosPage";
+import PostDetailPage from "./pages/PostDetailPage";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminEditor from "./pages/admin/AdminEditor";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminSetup from "./pages/admin/AdminSetup";
 
 const queryClient = new QueryClient();
 
@@ -101,6 +109,31 @@ const App = () => (
               </Layout>
             }
           />
+          {/* CMS - Public Routes */}
+          <Route
+            path="/comunicados"
+            element={
+              <Layout>
+                <ComunicadosPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/comunicados/:slug"
+            element={
+              <Layout>
+                <PostDetailPage />
+              </Layout>
+            }
+          />
+          {/* CMS - Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/setup" element={<AdminSetup />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="editor" element={<AdminEditor />} />
+            <Route path="users" element={<AdminUsers />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route
             path="*"
