@@ -1,13 +1,14 @@
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { Navigate, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Loader2, LogOut, LayoutDashboard, FileText, GraduationCap, Users, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useRole } from '@/hooks/useRole';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export default function AdminLayout() {
   const { profile, role, loading, canManageUsers, isAdmin } = useRole();
   const navigate = useNavigate();
+  const location = useLocation();
 
   console.log('AdminLayout - Profile:', profile);
   console.log('AdminLayout - Role:', role);
@@ -56,131 +57,124 @@ export default function AdminLayout() {
     return <Navigate to="/admin/dashboard" replace />;
   }
 
+  const isActive = (path: string) => location.pathname === path;
+
   return (
-    <div className="min-h-screen bg-secondary/30">
-      {/* Header */}
-      <header className="bg-white border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <GraduationCap className="w-8 h-8 text-primary" />
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="font-bold text-primary">FAETERJ-Rio CMS</h1>
-                  <Badge variant={isAdmin ? "default" : "secondary"} className="text-xs">
-                    {isAdmin ? <Shield className="w-3 h-3 mr-1" /> : null}
-                    {role === 'admin' ? 'Admin' : role === 'editor' ? 'Editor' : 'Usuário'}
-                  </Badge>
-                </div>
-                <p className="text-xs text-foreground/60">{profile.full_name || profile.institutional_email}</p>
-              </div>
-            </div>
-
-            <nav className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/admin/dashboard')}
-                className={role === 'admin' ? 'bg-primary/10' : 'gap-2'}
-              >
-                <LayoutDashboard className="w-4 h-4" />
-                Dashboard
-              </Button>
-              
-              {(role === 'admin' || role === 'editor') && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigate('/admin/editor')}
-                  className={role === 'editor' ? 'bg-primary/10' : 'gap-2'}
-                >
-                  <FileText className="w-4 h-4" />
-                  Novo Post
-                </Button>
-              )}
-              
-              {canManageUsers && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigate('/admin/users')}
-                  className="gap-2"
-                >
-                  <Users className="w-4 h-4" />
-                  Usuários
-                </Button>
-              )}
-            </nav>
-
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/')}
-                className="hidden sm:flex"
-              >
-                Ver Site
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleLogout}
-                className="gap-2"
-              >
-                <LogOut className="w-4 h-4" />
-                Sair
-              </Button>
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
+      {/* Sidebar */}
+      <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white flex flex-col overflow-y-auto">
+        {/* Logo */}
+        <div className="p-4 border-b border-white/10">
+          <div className="flex items-center gap-2">
+            {/* FAETERJ Logo SVG */}
+            <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#3B82F6"/>
+              <text x="20" y="26" fontSize="24" fontWeight="bold" fill="white" textAnchor="middle" fontFamily="Arial">F</text>
+            </svg>
+            <div>
+              <h1 className="font-bold text-white text-sm">FAETERJ-Rio</h1>
+              <p className="text-xs text-white/60">CMS</p>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden bg-white border-b border-border">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex gap-2 overflow-x-auto">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate('/admin/dashboard')}
-              className="gap-2 whitespace-nowrap"
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              Dashboard
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
+        {/* User Info */}
+        <div className="px-6 py-4 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+              <span className="text-sm font-bold text-white">
+                {profile?.full_name?.charAt(0) || 'A'}
+              </span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">{profile?.full_name || 'Admin'}</p>
+              <Badge variant={isAdmin ? "default" : "secondary"} className="text-xs mt-1">
+                {role === 'admin' ? 'Admin' : role === 'editor' ? 'Editor' : 'Usuário'}
+              </Badge>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 px-4 py-6 space-y-2">
+          <NavButton
+            icon={<LayoutDashboard className="w-5 h-5" />}
+            label="Dashboard"
+            onClick={() => navigate('/admin/dashboard')}
+            active={isActive('/admin/dashboard')}
+          />
+
+          {(role === 'admin' || role === 'editor') && (
+            <NavButton
+              icon={<FileText className="w-5 h-5" />}
+              label="Novo Post"
               onClick={() => navigate('/admin/editor')}
-              className="gap-2 whitespace-nowrap"
-            >
-              <FileText className="w-4 h-4" />
-              Novo Post
-            </Button>
-            {canManageUsers && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/admin/users')}
-                className="gap-2 whitespace-nowrap"
-              >
-                <Users className="w-4 h-4" />
-                Usuários
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
+              active={isActive('/admin/editor')}
+            />
+          )}
 
-      {/* Main Content */}
-      <motion.main
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="container mx-auto px-4 py-8"
-      >
-        <Outlet />
-      </motion.main>
+          {canManageUsers && (
+            <NavButton
+              icon={<Users className="w-5 h-5" />}
+              label="Usuários"
+              onClick={() => navigate('/admin/users')}
+              active={isActive('/admin/users')}
+            />
+          )}
+        </nav>
+
+        {/* Logout Button */}
+        <div className="p-4 border-t border-white/10">
+          <Button
+            onClick={handleLogout}
+            className="w-full gap-2 bg-white/10 hover:bg-white/20 text-white"
+            variant="ghost"
+          >
+            <LogOut className="w-4 h-4" />
+            Sair
+          </Button>
+        </div>
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <motion.main
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-1 overflow-y-auto"
+        >
+          <div className="p-8">
+            <Outlet />
+          </div>
+        </motion.main>
+      </div>
     </div>
+  );
+}
+
+function NavButton({
+  icon,
+  label,
+  onClick,
+  active,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  onClick: () => void;
+  active: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors ${
+        active
+          ? 'bg-primary text-white'
+          : 'text-white/70 hover:text-white hover:bg-white/10'
+      }`}
+    >
+      {icon}
+      <span className="text-sm font-medium">{label}</span>
+    </button>
   );
 }

@@ -3,27 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import { supabase, Post } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Plus, 
-  Pencil, 
-  Trash2, 
-  Search, 
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  Search,
   Loader2,
   ChevronLeft,
   ChevronRight,
   Eye,
-  EyeOff
+  EyeOff,
+  TrendingUp,
+  FileText,
+  CheckCircle2
 } from 'lucide-react';
-import { 
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -48,6 +51,8 @@ export default function AdminDashboard() {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [draftsCount, setDraftsCount] = useState(0);
+  const [publishedCount, setPublishedCount] = useState(0);
   const navigate = useNavigate();
 
   console.log('AdminDashboard - Permissões recebidas:', {
@@ -60,6 +65,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     console.log('AdminDashboard - Carregando posts...');
     fetchPosts();
+    fetchStats();
   }, [currentPage, search]);
 
   const fetchPosts = async () => {
@@ -97,6 +103,27 @@ export default function AdminDashboard() {
     }
   };
 
+  const fetchStats = async () => {
+    try {
+      // Fetch drafts count
+      const { count: drafts } = await supabase
+        .from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'draft');
+
+      // Fetch published count
+      const { count: published } = await supabase
+        .from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'published');
+
+      setDraftsCount(drafts || 0);
+      setPublishedCount(published || 0);
+    } catch (err: any) {
+      console.error('AdminDashboard - Erro no fetchStats:', err);
+    }
+  };
+
   const handleDelete = async () => {
     if (!deleteId) return;
 
@@ -121,6 +148,48 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Total Posts */}
+        <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-gray-600 font-medium">Posts Totais</p>
+              <p className="text-3xl font-bold text-gray-900 mt-2">{totalCount}</p>
+            </div>
+            <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
+              <TrendingUp className="w-6 h-6 text-blue-600" />
+            </div>
+          </div>
+        </div>
+
+        {/* Rascunhos */}
+        <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-gray-600 font-medium">Rascunhos</p>
+              <p className="text-3xl font-bold text-gray-900 mt-2">{draftsCount}</p>
+            </div>
+            <div className="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center">
+              <FileText className="w-6 h-6 text-orange-600" />
+            </div>
+          </div>
+        </div>
+
+        {/* Publicados */}
+        <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-gray-600 font-medium">Publicados</p>
+              <p className="text-3xl font-bold text-gray-900 mt-2">{publishedCount}</p>
+            </div>
+            <div className="w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center">
+              <CheckCircle2 className="w-6 h-6 text-green-600" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -275,7 +344,7 @@ export default function AdminDashboard() {
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              className="bg-red-600 text-white hover:bg-red-700"
             >
               Excluir
             </AlertDialogAction>
