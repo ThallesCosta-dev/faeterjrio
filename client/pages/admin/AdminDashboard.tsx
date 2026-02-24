@@ -22,7 +22,9 @@ import {
   ChevronRight,
   Eye,
   EyeOff,
-  TrendingUp
+  TrendingUp,
+  FileText,
+  CheckCircle2
 } from 'lucide-react';
 import {
   AlertDialog,
@@ -169,7 +171,7 @@ export default function AdminDashboard() {
               <p className="text-3xl font-bold text-gray-900 mt-2">{draftsCount}</p>
             </div>
             <div className="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center">
-              <span className="text-xl">📝</span>
+              <FileText className="w-6 h-6 text-orange-600" />
             </div>
           </div>
         </div>
@@ -182,7 +184,7 @@ export default function AdminDashboard() {
               <p className="text-3xl font-bold text-gray-900 mt-2">{publishedCount}</p>
             </div>
             <div className="w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center">
-              <Eye className="w-6 h-6 text-green-600" />
+              <CheckCircle2 className="w-6 h-6 text-green-600" />
             </div>
           </div>
         </div>
