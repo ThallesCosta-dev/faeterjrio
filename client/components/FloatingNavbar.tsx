@@ -42,7 +42,7 @@ export function FloatingNavbar() {
               className="w-10 h-10 transition-all duration-300"
               style={{
                 filter: scrolled
-                  ? 'invert(1) saturate(0.4) brightness(0.5) hue-rotate(210deg)'
+                  ? 'invert(1) sepia(1) saturate(1.5) hue-rotate(195deg) brightness(0.9)'
                   : 'invert(1)',
                 opacity: 1,
               }}

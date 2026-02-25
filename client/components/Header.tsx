@@ -16,7 +16,7 @@ export function Header() {
               alt="FAETERJ Logo"
               className="w-10 h-10 transition-all duration-300"
               style={{
-                filter: 'saturate(1.1)',
+                filter: 'invert(1) sepia(1) saturate(1.5) hue-rotate(195deg) brightness(0.9)',
               }}
             />
             <div className="hidden sm:block">
