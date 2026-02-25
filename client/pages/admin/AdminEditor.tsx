@@ -147,15 +147,23 @@ export default function AdminEditor() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    console.log('Iniciando upload:', file.name, file.size, file.type);
     setUploadingImage(true);
     try {
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
       const filePath = `posts/${fileName}`;
 
-      const { error: uploadError } = await supabase.storage
+      console.log('Fazendo upload para:', filePath);
+
+      const { data, error: uploadError } = await supabase.storage
         .from('cms-images')
-        .upload(filePath, file);
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      console.log('Resultado upload:', { data, error: uploadError });
 
       if (uploadError) throw uploadError;
 
@@ -163,9 +171,12 @@ export default function AdminEditor() {
         .from('cms-images')
         .getPublicUrl(filePath);
 
+      console.log('URL pública:', publicUrl);
+
       setFormData(prev => ({ ...prev, cover_image: publicUrl }));
       toast.success('Imagem carregada com sucesso!');
     } catch (err: any) {
+      console.error('Erro no upload:', err);
       toast.error('Erro ao fazer upload: ' + err.message);
     } finally {
       setUploadingImage(false);
