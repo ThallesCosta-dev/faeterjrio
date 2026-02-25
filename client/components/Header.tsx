@@ -10,10 +10,15 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-lg">
-              F
-            </div>
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src="/logo_faeterj.svg"
+              alt="FAETERJ Logo"
+              className="w-10 h-10 transition-all duration-300"
+              style={{
+                filter: 'saturate(1.1)',
+              }}
+            />
             <div className="hidden sm:block">
               <h1 className="text-sm font-bold text-primary">FAETERJ-Rio</h1>
               <p className="text-xs text-muted-foreground">Rio de Janeiro</p>

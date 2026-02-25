@@ -1,19 +1,11 @@
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useLogoColor } from "@/hooks/useLogoColor";
 
 export function FloatingNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { scrolled, logoColor } = useLogoColor();
 
   const menuItems = [
     { label: "Início", href: "/" },
@@ -43,11 +35,17 @@ export function FloatingNavbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl">
+          <Link to="/" className="flex items-center gap-3 font-bold text-xl">
             <img
-              src="/android-chrome-512x512.png"
-              alt="Logo"
-              className="w-8 h-8 rounded-lg"
+              src="/logo_faeterj.svg"
+              alt="FAETERJ Logo"
+              className="w-10 h-10 transition-all duration-300"
+              style={{
+                filter: scrolled
+                  ? 'invert(1) brightness(0.65) saturate(1.2)'
+                  : 'brightness(1) saturate(1)',
+                opacity: 1,
+              }}
             />
             <span
               className={`transition-colors ${
