@@ -50,7 +50,9 @@ export default function Index() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="/coruja"
+              href="https://faeterj-rio.edu.br/coruja/autenticar/login_controle.php"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-4 border-2 border-white text-white rounded-lg font-bold hover:bg-white/10 transition-all inline-flex items-center justify-center gap-2"
             >
               Acessar Portal do Aluno
