@@ -62,15 +62,18 @@ export default function AdminLayout() {
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white flex flex-col overflow-y-auto">
+      <aside className="w-64 bg-primary text-white flex flex-col overflow-y-auto">
         {/* Logo */}
         <div className="p-4 border-b border-white/10">
-          <div className="flex items-center gap-2">
-            {/* FAETERJ Logo SVG */}
-            <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="8" fill="#3B82F6"/>
-              <text x="20" y="26" fontSize="24" fontWeight="bold" fill="white" textAnchor="middle" fontFamily="Arial">F</text>
-            </svg>
+          <div className="flex items-center gap-3">
+            <img
+              src="/logo_faeterj.svg"
+              alt="FAETERJ Logo"
+              className="w-10 h-10 transition-all duration-300"
+              style={{
+                filter: 'invert(1)',
+              }}
+            />
             <div>
               <h1 className="font-bold text-white text-sm">FAETERJ-Rio</h1>
               <p className="text-xs text-white/60">CMS</p>

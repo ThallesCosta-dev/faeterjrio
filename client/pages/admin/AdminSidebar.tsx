@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LayoutDashboard, FileText, Users, Settings, LogOut, GraduationCap } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, Settings, LogOut } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 interface AdminSidebarProps {
@@ -17,11 +17,18 @@ export default function AdminSidebar({ profile, role, canManageUsers, onLogout }
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white flex flex-col">
+    <aside className="w-64 bg-primary text-white flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-white/10">
         <div className="flex items-center gap-3 mb-4">
-          <GraduationCap className="w-8 h-8" />
+          <img
+            src="/logo_faeterj.svg"
+            alt="FAETERJ Logo"
+            className="w-8 h-8 transition-all duration-300"
+            style={{
+              filter: 'invert(1)',
+            }}
+          />
           <div>
             <h1 className="font-bold text-white">FAETERJ-Rio CMS</h1>
             <p className="text-xs text-white/60">Content Management</p>
