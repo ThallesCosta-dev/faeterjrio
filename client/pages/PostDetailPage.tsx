@@ -22,6 +22,9 @@ export default function PostDetailPage() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    // Scroll to top when component mounts or slug changes
+    window.scrollTo(0, 0);
+    
     if (slug) {
       fetchPost(slug);
     }
