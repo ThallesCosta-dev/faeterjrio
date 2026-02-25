@@ -44,9 +44,14 @@ export function HeroSection() {
               Conheça Nossos Cursos
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+            <a 
+              href="https://faeterj-rio.edu.br/central/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
+            >
               Solicitar Informações
-            </button>
+            </a>
           </div>
         </div>
       </div>

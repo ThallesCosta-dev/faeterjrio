@@ -167,13 +167,16 @@ export function HomeHero() {
               Conheça nosso curso
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
-            <motion.button
+            <motion.a
+              href="https://faeterj-rio.edu.br/central/"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition-all"
             >
               Solicitar Informações
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </div>
