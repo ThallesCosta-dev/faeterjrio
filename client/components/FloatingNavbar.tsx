@@ -42,9 +42,8 @@ export function FloatingNavbar() {
               className="w-10 h-10 transition-all duration-300"
               style={{
                 filter: scrolled
-                  ? 'invert(1) sepia(1) saturate(1.5) hue-rotate(195deg) brightness(0.9)'
+                  ? 'brightness(0) saturate(100%) invert(24%) sepia(60%) saturate(500%) hue-rotate(195deg) brightness(97%)'
                   : 'invert(1)',
-                opacity: 1,
               }}
             />
             <span

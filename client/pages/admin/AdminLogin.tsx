@@ -75,7 +75,7 @@ export default function AdminLogin() {
               alt="FAETERJ Logo"
               className="w-8 h-8"
               style={{
-                filter: 'invert(1) sepia(1) saturate(1.5) hue-rotate(195deg) brightness(0.9)',
+                filter: 'brightness(0) saturate(100%) invert(24%) sepia(60%) saturate(500%) hue-rotate(195deg) brightness(97%)',
               }}
             />
             </div>
