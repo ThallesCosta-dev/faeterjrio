@@ -62,7 +62,7 @@ export default function AdminLayout() {
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white flex flex-col overflow-y-auto">
+      <aside className="w-64 bg-primary text-white flex flex-col overflow-y-auto">
         {/* Logo */}
         <div className="p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
