@@ -26,7 +26,7 @@ export default function AdminSidebar({ profile, role, canManageUsers, onLogout }
             alt="FAETERJ Logo"
             className="w-8 h-8 transition-all duration-300"
             style={{
-              filter: 'brightness(0) saturate(100%) invert(24%) sepia(60%) saturate(500%) hue-rotate(195deg) brightness(97%)',
+              filter: 'invert(1)',
             }}
           />
           <div>

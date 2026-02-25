@@ -71,7 +71,7 @@ export default function AdminLayout() {
               alt="FAETERJ Logo"
               className="w-10 h-10 transition-all duration-300"
               style={{
-                filter: 'brightness(0) saturate(100%) invert(24%) sepia(60%) saturate(500%) hue-rotate(195deg) brightness(97%)',
+                filter: 'invert(1)',
               }}
             />
             <div>
