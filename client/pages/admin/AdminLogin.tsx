@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { GraduationCap, Loader2, Lock, Mail } from 'lucide-react';
+import { Loader2, Lock, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function AdminLogin() {
@@ -70,7 +70,14 @@ export default function AdminLogin() {
         <Card className="border-primary/20 shadow-lg">
           <CardHeader className="text-center space-y-4">
             <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-              <GraduationCap className="w-8 h-8 text-primary" />
+              <img
+                src="/logo_faeterj.svg"
+                alt="FAETERJ Logo"
+                className="w-8 h-8"
+                style={{
+                  filter: 'saturate(1.3)',
+                }}
+              />
             </div>
             <div>
               <CardTitle className="text-2xl font-bold text-primary">
