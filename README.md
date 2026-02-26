@@ -117,5 +117,5 @@ MIT License – sinta-se à vontade para estudar e adaptar (mantendo os crédito
 
 ---
 
-Feito com 💙 para a comunidade FAETEC  
+Feito com 💙 para a comunidade FAETERJ-Rio
 Desenvolvido por Thalles Costa • 2026
