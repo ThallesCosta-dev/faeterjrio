@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { supabase, Post } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { RichTextViewer } from '@/components/RichTextViewer';
 import { 
   Loader2, 
   Calendar, 
@@ -184,9 +185,9 @@ export default function PostDetailPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-white rounded-lg border border-border p-6 md:p-10"
           >
-            <div 
+            <RichTextViewer
+              html={post.content}
               className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80"
-              dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </motion.article>
 

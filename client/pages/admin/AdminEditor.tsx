@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { supabase, Post } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { 
   Select,
   SelectContent,
@@ -25,27 +24,8 @@ import {
 import { toast } from 'sonner';
 import { slugify } from '@/lib/utils';
 import { useRole } from '@/hooks/useRole';
-
-// Rich Text Editor Toolbar Button
-const ToolbarButton = ({ 
-  onClick, 
-  active, 
-  children 
-}: { 
-  onClick: () => void; 
-  active?: boolean; 
-  children: React.ReactNode 
-}) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className={`p-2 rounded hover:bg-primary/10 transition-colors ${
-      active ? 'bg-primary/20 text-primary' : 'text-foreground/70'
-    }`}
-  >
-    {children}
-  </button>
-);
+import { RichTextEditor } from '@/components/RichTextEditor';
+import { RichTextViewer } from '@/components/RichTextViewer';
 
 export default function AdminEditor() {
   const { canCreatePosts, canEditPosts, canPublishPosts, profile, loading: roleLoading } = useRole();
@@ -53,7 +33,6 @@ export default function AdminEditor() {
   const postId = searchParams.get('id');
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const [loading, setLoading] = useState(!!postId);
   const [saving, setSaving] = useState(false);
@@ -122,25 +101,6 @@ export default function AdminEditor() {
       title,
       slug: prev.slug || slugify(title),
     }));
-  };
-
-  const insertFormatting = (before: string, after: string = '') => {
-    const textarea = contentRef.current;
-    if (!textarea) return;
-
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const text = formData.content;
-    const selected = text.substring(start, end);
-    
-    const newContent = text.substring(0, start) + before + selected + after + text.substring(end);
-    setFormData(prev => ({ ...prev, content: newContent }));
-    
-    setTimeout(() => {
-      textarea.focus();
-      const newCursor = start + before.length + selected.length;
-      textarea.setSelectionRange(newCursor, newCursor);
-    }, 0);
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -402,41 +362,11 @@ export default function AdminEditor() {
 
           <TabsContent value="write" className="space-y-4">
             <div className="space-y-2">
-              <Label>Conteúdo (HTML)</Label>
-              
-              {/* Simple Toolbar */}
-              <div className="flex flex-wrap gap-1 p-2 bg-secondary/50 rounded-t-lg border border-border">
-                <ToolbarButton onClick={() => insertFormatting('<h2>', '</h2>')}>
-                  H2
-                </ToolbarButton>
-                <ToolbarButton onClick={() => insertFormatting('<h3>', '</h3>')}>
-                  H3
-                </ToolbarButton>
-                <ToolbarButton onClick={() => insertFormatting('<p>', '</p>')}>
-                  P
-                </ToolbarButton>
-                <div className="w-px h-6 bg-border mx-1" />
-                <ToolbarButton onClick={() => insertFormatting('<strong>', '</strong>')}>
-                  <strong>B</strong>
-                </ToolbarButton>
-                <ToolbarButton onClick={() => insertFormatting('<em>', '</em>')}>
-                  <em>I</em>
-                </ToolbarButton>
-                <div className="w-px h-6 bg-border mx-1" />
-                <ToolbarButton onClick={() => insertFormatting('<ul>\n  <li>', '</li>\n</ul>')}>
-                  Lista
-                </ToolbarButton>
-                <ToolbarButton onClick={() => insertFormatting('<a href="">', '</a>')}>
-                  Link
-                </ToolbarButton>
-              </div>
+              <Label>Conteúdo</Label>
 
-              <Textarea
-                ref={contentRef}
+              <RichTextEditor
                 value={formData.content}
-                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                placeholder="Digite o conteúdo do post em HTML..."
-                className="min-h-[400px] font-mono text-sm rounded-t-none"
+                onChange={(html) => setFormData(prev => ({ ...prev, content: html }))}
               />
             </div>
           </TabsContent>
@@ -444,10 +374,7 @@ export default function AdminEditor() {
           <TabsContent value="preview">
             <div className="border border-border rounded-lg p-6 min-h-[400px]">
               {formData.content ? (
-                <div 
-                  className="prose prose-slate max-w-none"
-                  dangerouslySetInnerHTML={{ __html: formData.content }}
-                />
+                <RichTextViewer html={formData.content} className="prose prose-slate max-w-none" />
               ) : (
                 <p className="text-foreground/40 italic">Nenhum conteúdo para preview...</p>
               )}
