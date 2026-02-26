@@ -1,8 +1,8 @@
-🏛️ FAETERJ-Rio - Novo Portal Institucional & CMS
+ FAETERJ-Rio - Novo Portal Institucional & CMS
 
 Este repositório contém o código-fonte do **novo site institucional da FAETERJ-Rio**, desenvolvido com abordagem **mobile-first** e incluindo um **CMS integrado** para permitir que a secretaria gerencie comunicados, notícias e conteúdos de forma autônoma.
 
-## 🎯 Objetivo do Projeto
+## Objetivo do Projeto
 
 Modernizar a presença digital da instituição, oferecendo:
 - Navegação rápida e responsiva
@@ -10,7 +10,7 @@ Modernizar a presença digital da instituição, oferecendo:
 - Painel administrativo simples e seguro
 - Consumo de dados em tempo real no frontend
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 | Camada            | Tecnologia                          | Finalidade                              |
 |-------------------|-------------------------------------|-----------------------------------------|
@@ -20,14 +20,14 @@ Modernizar a presença digital da instituição, oferecendo:
 | Hospedagem (Prod) | HostGator (cPanel)                  | Ambiente oficial FAETEC                 |
 | Roteamento        | React Router DOM                    | Navegação SPA                           |
 
-## ⚙️ Arquitetura do CMS
+##  Arquitetura do CMS
 
 - Autenticação restrita via **Supabase Auth**
 - Tabelas relacionais no PostgreSQL para comunicados, autores, datas e categorias
 - Painel administrativo com operações **CRUD** completo
 - Consumo de dados em tempo real no site público (via Supabase client)
 
-## 🛠️ Como rodar localmente
+## Como rodar localmente
 
 ### Pré-requisitos
 
@@ -67,7 +67,7 @@ npm run dev
 A aplicação estará disponível em:
 → http://localhost:5173
 
-## 📦 Deploy
+## Deploy
 
 ### Opção 1 – Homologação (Netlify)
 
@@ -111,7 +111,7 @@ npm run build
 </IfModule>
 ```
 
-## 📄 Licença
+## Licença
 
 MIT License – sinta-se à vontade para estudar e adaptar (mantendo os créditos quando possível).
 
