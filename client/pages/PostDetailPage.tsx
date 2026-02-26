@@ -187,7 +187,7 @@ export default function PostDetailPage() {
           >
             <RichTextViewer
               html={post.content}
-              className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80"
+              className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80 prose-p:whitespace-pre-wrap prose-li:whitespace-pre-wrap"
             />
           </motion.article>
 

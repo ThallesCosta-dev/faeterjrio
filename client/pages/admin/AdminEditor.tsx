@@ -374,7 +374,10 @@ export default function AdminEditor() {
           <TabsContent value="preview">
             <div className="border border-border rounded-lg p-6 min-h-[400px]">
               {formData.content ? (
-                <RichTextViewer html={formData.content} className="prose prose-slate max-w-none" />
+                <RichTextViewer
+                  html={formData.content}
+                  className="prose prose-slate max-w-none prose-p:whitespace-pre-wrap prose-li:whitespace-pre-wrap"
+                />
               ) : (
                 <p className="text-foreground/40 italic">Nenhum conteúdo para preview...</p>
               )}

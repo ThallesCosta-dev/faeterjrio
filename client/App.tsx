@@ -1,5 +1,6 @@
 import "./global.css";
 
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -17,12 +18,13 @@ import LoginCoruja from "./pages/LoginCoruja";
 import NotFound from "./pages/NotFound";
 import ComunicadosPage from "./pages/ComunicadosPage";
 import PostDetailPage from "./pages/PostDetailPage";
-import AdminLogin from "./pages/admin/AdminLogin";
-import AdminLayout from "./pages/admin/AdminLayout";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminEditor from "./pages/admin/AdminEditor";
-import AdminUsers from "./pages/admin/AdminUsers";
-import AdminSetup from "./pages/admin/AdminSetup";
+
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminEditor = lazy(() => import("./pages/admin/AdminEditor"));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminSetup = lazy(() => import("./pages/admin/AdminSetup"));
 
 const queryClient = new QueryClient();
 
@@ -46,7 +48,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
+        <Suspense fallback={<div className="min-h-screen" />}>
+          <Routes>
           <Route
             path="/"
             element={
@@ -143,7 +146,8 @@ const App = () => (
               </Layout>
             }
           />
-        </Routes>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
