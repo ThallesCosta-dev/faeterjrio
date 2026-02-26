@@ -39,8 +39,8 @@ Modernizar a presença digital da instituição, oferecendo:
 1. Clone o repositório
 
 ```bash
-git clone https://github.com/_ThallesCosta_/faeterj-rio-portal.git
-cd faeterj-rio-portal
+git clone https://github.com/ThallesCosta-dev/faeterjrio.git
+cd faeterjrio
 ```
 
 2. Instale as dependências
@@ -110,16 +110,6 @@ npm run build
   RewriteRule . /index.html [L]
 </IfModule>
 ```
-
-## 🚧 Roadmap / Próximos Melhorias
-
-- [ ] Implementar editor rich text (ex: TipTap, Quill, Lexical)
-- [ ] Paginação + infinite scroll no feed de notícias
-- [ ] Filtros e busca nos comunicados
-- [ ] Área de login com recuperação de senha
-- [ ] Migração do domínio oficial + configuração de DNS
-- [ ] Dark mode / temas
-- [ ] Cache inteligente das consultas Supabase
 
 ## 📄 Licença
 
