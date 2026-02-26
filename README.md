@@ -1,263 +1,131 @@
-# FAETERJ Rio - Portal Institucional
+🏛️ FAETERJ-Rio - Novo Portal Institucional & CMS
 
-Portal web moderno e completo para a FAETERJ - Faculdade de Educação Tecnológica do Estado do Rio de Janeiro, desenvolvido com React, TypeScript e integração com Supabase.
+Este repositório contém o código-fonte do **novo site institucional da FAETERJ-Rio**, desenvolvido com abordagem **mobile-first** e incluindo um **CMS integrado** para permitir que a secretaria gerencie comunicados, notícias e conteúdos de forma autônoma.
 
-## 🚀 Visão Geral
+## 🎯 Objetivo do Projeto
 
-Este projeto é um sistema institucional full-stack que inclui:
-- **Portal Público**: Site institucional com informações sobre cursos, admission e comunicados
-- **Sistema de CMS**: Gerenciador de conteúdo para comunicados e notícias
-- **Painel Administrativo**: Interface completa para gestão de conteúdo
-- **Sistema de Autenticação**: Login seguro para administradores
+Modernizar a presença digital da instituição, oferecendo:
+- Navegação rápida e responsiva
+- Atualização de conteúdos sem necessidade de programadores
+- Painel administrativo simples e seguro
+- Consumo de dados em tempo real no frontend
 
-## 🛠️ Stack Tecnológico
+## 🚀 Tecnologias Utilizadas
 
-### Frontend
-- **React 18** com TypeScript
-- **Vite** como bundler e servidor de desenvolvimento
-- **TailwindCSS 3** para estilização
-- **React Router 6** para navegação SPA
-- **Radix UI** para componentes acessíveis
-- **Framer Motion** para animações
-- **React Query** para gerenciamento de estado de servidor
+| Camada            | Tecnologia                          | Finalidade                              |
+|-------------------|-------------------------------------|-----------------------------------------|
+| Frontend          | React + Vite                        | Interface moderna e rápida              |
+| Backend / Banco   | Supabase (PostgreSQL + Auth)        | Banco de dados, autenticação e API      |
+| Hospedagem (Teste)| Netlify                             | Deploy contínuo e ambiente de homologação |
+| Hospedagem (Prod) | HostGator (cPanel)                  | Ambiente oficial FAETEC                 |
+| Roteamento        | React Router DOM                    | Navegação SPA                           |
 
-### Backend
-- **Express.js** para API REST
-- **Supabase** como banco de dados e autenticação
-- **TypeScript** para type safety
+## ⚙️ Arquitetura do CMS
 
-### Ferramentas
-- **PNPM** como gerenciador de pacotes
-- **Vitest** para testes
-- **ESLint + Prettier** para código limpo
-- **Vite** para build e desenvolvimento
+- Autenticação restrita via **Supabase Auth**
+- Tabelas relacionais no PostgreSQL para comunicados, autores, datas e categorias
+- Painel administrativo com operações **CRUD** completo
+- Consumo de dados em tempo real no site público (via Supabase client)
 
-## 📁 Estrutura do Projeto
-
-```
-faeterjrio/
-├── client/                     # Frontend React
-│   ├── components/
-│   │   ├── ui/                # Componentes UI reutilizáveis
-│   │   ├── FloatingNavbar.tsx
-│   │   ├── Footer.tsx
-│   │   └── ...
-│   ├── pages/                 # Páginas da aplicação
-│   │   ├── admin/            # Páginas administrativas
-│   │   ├── Index.tsx         # Home
-│   │   └── ...
-│   ├── hooks/                 # Hooks personalizados
-│   ├── lib/                   # Utilitários
-│   └── App.tsx               # Entry point com rotas
-├── server/                    # Backend Express
-│   ├── routes/               # Endpoints da API
-│   └── index.ts              # Configuração do servidor
-├── shared/                    # Tipos compartilhados
-├── supabase/                  # Migrations e schema
-├── public/                    # Assets estáticos
-└── netlify/                   # Configuração de deploy
-```
-
-## 🚀 Começando
+## 🛠️ Como rodar localmente
 
 ### Pré-requisitos
-- Node.js 18+
-- PNPM (recomendado)
-- Conta Supabase
 
-### Instalação
+- Node.js (recomendado: v18 ou superior)
+- Conta no Supabase com projeto criado
 
-1. **Clone o repositório**
-```bash
-git clone <repository-url>
-cd faeterjrio
-```
+### Passo a passo
 
-2. **Instale as dependências**
-```bash
-pnpm install
-```
-
-3. **Configure as variáveis de ambiente**
-```bash
-cp .env.example .env
-# Edite .env com suas credenciais do Supabase
-```
-
-4. **Configure o Supabase**
-- Execute as migrations em `supabase/migrations/`
-- Configure o storage bucket `cms-images`
-- Crie usuário administrativo
-
-5. **Inicie o desenvolvimento**
-```bash
-pnpm dev
-```
-
-A aplicação estará disponível em `http://localhost:8080`
-
-## 🌐 Rotas da Aplicação
-
-### Públicas
-- `/` - Página inicial
-- `/matriz-ementas` - Matriz de ementas dos cursos
-- `/admission` - Informações de admissão
-- `/about` - Sobre a instituição
-- `/comunicados` - Lista de comunicados
-- `/comunicados/:slug` - Detalhes de um comunicado
-
-### Administrativas
-- `/admin/login` - Login do administrador
-- `/admin/dashboard` - Painel de controle
-- `/admin/editor` - Criar/editar comunicados
-- `/admin/users` - Gestão de usuários
-
-### Sistema Externo
-- `/coruja` - Portal do aluno (redirecionamento)
-
-## 🎨 Features Implementadas
-
-### Portal Institucional
-- **Design Responsivo**: Layout adaptável para todos os dispositivos
-- **Navegação Intuitiva**: Menu flutuante com navegação suave
-- **Carrossel Dinâmico**: Destaque de informações importantes
-- **Seções Organizadas**: Cursos, admission, sobre nós
-
-### Sistema de CMS
-- **Gerenciamento de Posts**: Criar, editar, excluir comunicados
-- **Upload de Imagens**: Integração com Supabase Storage
-- **Rich Text Editor**: Editor de texto completo
-- **Publicação Programada**: Agendar publicações
-- **Categorias e Tags**: Organização de conteúdo
-
-### Painel Administrativo
-- **Dashboard Analítico**: Estatísticas de uso
-- **Gestão de Usuários**: Controle de acessos
-- **Interface Moderna**: UI/UX otimizada
-- **Segurança**: Autenticação e autorização
-
-## 🔧 Desenvolvimento
-
-### Scripts Disponíveis
-```bash
-pnpm dev          # Servidor de desenvolvimento
-pnpm build        # Build para produção
-pnpm start        # Servidor de produção
-pnpm test         # Executar testes
-pnpm typecheck    # Verificação de tipos
-pnpm format.fix   # Formatar código
-```
-
-### Adicionando Novas Páginas
-
-1. **Criar componente** em `client/pages/`
-```typescript
-// client/pages/NovaPagina.tsx
-export default function NovaPagina() {
-  return <div>Nova página</div>;
-}
-```
-
-2. **Adicionar rota** em `client/App.tsx`
-```typescript
-<Route path="/nova-pagina" element={
-  <Layout>
-    <NovaPagina />
-  </Layout>
-} />
-```
-
-### Criando Novas APIs
-
-1. **Definir interface** em `shared/api.ts`
-2. **Criar handler** em `server/routes/`
-3. **Registrar rota** em `server/index.ts`
-
-## 🗄️ Banco de Dados (Supabase)
-
-### Tabelas Principais
-- `posts` - Comunicados e notícias
-- `profiles` - Perfis de usuários
-- `categories` - Categorias de posts
-
-### Storage
-- `cms-images` - Bucket para imagens do CMS
-
-### Segurança
-- Políticas RLS implementadas
-- Autenticação via Supabase Auth
-- Controle de acesso granular
-
-## 🚀 Deploy
-
-### Netlify (Recomendado)
-```bash
-pnpm build
-# Deploy automático via Git ou manual
-```
-
-### Produção Manual
-```bash
-pnpm build
-pnpm start
-```
-
-### Variáveis de Ambiente de Produção
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
-
-## 🧪 Testes
-
-O projeto usa Vitest para testes:
+1. Clone o repositório
 
 ```bash
-pnpm test              # Executar todos os testes
-pnpm test --watch      # Modo watch
-pnpm test --coverage   # Com cobertura
+git clone https://github.com/_ThallesCosta_/faeterj-rio-portal.git
+cd faeterj-rio-portal
 ```
 
-## 📱 Performance
+2. Instale as dependências
 
-### Otimizações Implementadas
-- **Code Splitting**: Divisão automática de código
-- **Lazy Loading**: Carregamento sob demanda
-- **Image Optimization**: Otimização de imagens
-- **Caching Strategy**: Cache inteligente
-- **Bundle Analysis**: Análise de bundle
+```bash
+npm install
+```
 
-### Métricas
-- **First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-- **Cumulative Layout Shift**: < 0.1
+3. Configure as variáveis de ambiente
 
-## 🔒 Segurança
+Crie um arquivo `.env` na raiz do projeto:
 
-### Medidas Implementadas
-- **CORS Configurado**: Restrição de origens
-- **Input Validation**: Validação com Zod
-- **SQL Injection Protection**: Via Supabase RLS
-- **XSS Prevention**: Sanitização de conteúdo
-- **Authentication**: JWT tokens seguros
+```env
+VITE_SUPABASE_URL=https://sua-url.supabase.co
+VITE_SUPABASE_ANON_KEY=sua-chave-anonima-aqui
+```
 
-## 🤝 Contribuição
+4. Inicie o servidor de desenvolvimento
 
-1. Fork o projeto
-2. Crie branch para feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -m 'Add nova feature'`)
-4. Push para branch (`git push origin feature/nova-feature`)
-5. Abra Pull Request
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em:
+→ http://localhost:5173
+
+## 📦 Deploy
+
+### Opção 1 – Homologação (Netlify)
+
+1. Conecte o repositório ao Netlify
+2. Configurações de build:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+
+3. Adicione as variáveis de ambiente no painel do Netlify:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+
+4. Crie arquivo `public/_redirects` com:
+
+```
+/*    /index.html   200
+```
+
+### Opção 2 – Produção (HostGator / cPanel)
+
+1. Gere a build localmente:
+
+```bash
+npm run build
+```
+
+2. Compacte a pasta `dist`
+3. No cPanel → Gerenciador de Arquivos → vá para `public_html`
+4. Faça upload e extraia o conteúdo da pasta `dist`
+5. Crie/edite arquivo `.htaccess` na raiz com:
+
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>
+```
+
+## 🚧 Roadmap / Próximos Melhorias
+
+- [ ] Implementar editor rich text (ex: TipTap, Quill, Lexical)
+- [ ] Paginação + infinite scroll no feed de notícias
+- [ ] Filtros e busca nos comunicados
+- [ ] Área de login com recuperação de senha
+- [ ] Migração do domínio oficial + configuração de DNS
+- [ ] Dark mode / temas
+- [ ] Cache inteligente das consultas Supabase
 
 ## 📄 Licença
 
-Este projeto está sob licença MIT - veja o arquivo LICENSE para detalhes.
-
-## 📞 Suporte
-
-Para dúvidas e suporte:
-- Email: [contato@faeterj.edu.br]
-- Issues: [GitHub Issues]
+MIT License – sinta-se à vontade para estudar e adaptar (mantendo os créditos quando possível).
 
 ---
 
-**Desenvolvido com ❤️ para a comunidade FAETERJ Rio**
+Feito com 💙 para a comunidade FAETEC  
+Desenvolvido por Thalles Costa • 2026
