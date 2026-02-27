@@ -1,4 +1,4 @@
-import { MessageCircle, Lock, Code2, ArrowRight } from "lucide-react";
+import { MessageCircle, Lock, Code2, ArrowRight, Newspaper } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function AccessDock() {
@@ -41,12 +41,19 @@ export function AccessDock() {
       url: "/matriz-ementas",
       external: false,
     },
+    {
+      title: "Comunicados & Notícias",
+      description: "Avisos oficiais e novidades da FAETERJ-Rio",
+      icon: Newspaper,
+      url: "/comunicados",
+      external: false,
+    },
   ];
 
   return (
     <section className="relative -mt-16 pb-20 md:pb-32 px-4 z-10">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {cards.map((card, index) => {
             const IconComponent = card.icon;
             return (

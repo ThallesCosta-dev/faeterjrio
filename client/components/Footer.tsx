@@ -1,5 +1,4 @@
 import {
-  Phone,
   Mail,
   MapPin,
   Clock,
@@ -66,15 +65,6 @@ export function Footer() {
                   <br />
                   Quintino Bocaiuva
                 </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 flex-shrink-0" />
-                <a
-                  href="tel:+552123324048"
-                  className="text-white/80 hover:text-white transition-colors"
-                >
-                  (21) 2332-4048
-                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 flex-shrink-0" />
