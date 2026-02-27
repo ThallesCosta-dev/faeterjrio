@@ -8,6 +8,7 @@ export function AccessDock() {
       description: "Resolva sua vida acadêmica",
       icon: MessageCircle,
       url: "https://faeterj-rio.edu.br/central/",
+      external: true,
     },
     {
       title: "Portal Coruja",
@@ -15,6 +16,7 @@ export function AccessDock() {
       icon: Lock,
       imageUrl: "/coruja.svg",
       url: "https://faeterj-rio.edu.br/coruja/autenticar/login_controle.php",
+      external: true,
     },
     {
       title: "Matriz e Ementas",
@@ -36,7 +38,8 @@ export function AccessDock() {
   <line x1="45" y1="74" x2="56" y2="74" stroke="#304a83" stroke-width="5" stroke-linecap="round" />
   <circle cx="33" cy="74" r="3.5" fill="#304a83" />
 </svg>`,
-      url: "https://www.faeterj-rio.edu.br/matriz-ementas.html",
+      url: "/matriz-ementas",
+      external: false,
     },
   ];
 
@@ -50,8 +53,8 @@ export function AccessDock() {
               <motion.a
                 key={index}
                 href={card.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={card.external ? "_blank" : undefined}
+                rel={card.external ? "noopener noreferrer" : undefined}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

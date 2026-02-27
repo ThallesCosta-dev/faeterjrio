@@ -8,6 +8,7 @@ export function QuickAccessCards() {
         "Fale conosco e tire suas dúvidas sobre admissão e vida acadêmica",
       icon: Headphones,
       url: "https://faeterj-rio.edu.br/central/",
+      external: true,
       color: "bg-blue-50 hover:bg-blue-100 text-primary",
       borderColor: "border-blue-200",
     },
@@ -16,6 +17,7 @@ export function QuickAccessCards() {
       description: "Acesse notas, horários e informações acadêmicas pessoais",
       icon: User,
       url: "https://faeterj-rio.edu.br/coruja/autenticar/login_controle.php",
+      external: true,
       color: "bg-indigo-50 hover:bg-indigo-100 text-primary",
       borderColor: "border-indigo-200",
     },
@@ -23,7 +25,8 @@ export function QuickAccessCards() {
       title: "Matriz e Ementas",
       description: "Consulte a grade curricular e ementas de todos os cursos",
       icon: FileText,
-      url: "https://www.faeterj-rio.edu.br/matriz-ementas.html",
+      url: "/matriz-ementas",
+      external: false,
       color: "bg-slate-50 hover:bg-slate-100 text-primary",
       borderColor: "border-slate-200",
     },
@@ -39,8 +42,8 @@ export function QuickAccessCards() {
               <a
                 key={index}
                 href={card.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={card.external ? "_blank" : undefined}
+                rel={card.external ? "noopener noreferrer" : undefined}
                 className={`group block p-6 md:p-8 rounded-xl border-2 ${card.borderColor} ${card.color} transition-all duration-300 hover:shadow-soft-lg hover:border-primary/50`}
               >
                 <div className="flex items-start gap-4">

@@ -47,12 +47,36 @@ export default function AboutPage() {
           lattes: "http://lattes.cnpq.br/9609477928978984",
         },
         {
+          name: "Prof. Vinícius Marques da Silva Ferreira",
+          subjects: ["CAW", "REQ", "PBD", "MOD", "UBD"],
+          role: "Engenharia de Software",
+          description:
+            "Atua com engenharia de requisitos, modelagem e desenvolvimento de aplicações web e banco de dados.",
+          lattes: "http://lattes.cnpq.br/6490780573139543",
+        },
+        {
           name: "Prof. Marcio Belo Rodrigues da Silva",
           subjects: ["REQ", "MOD", "POB"],
           role: "Arquitetura de Software",
           description:
             "Especialista em Análise e Modelagem. Ensina os fundamentos da Orientação a Objetos e estruturas de requisitos.",
           lattes: "http://lattes.cnpq.br/4659414483766533",
+        },
+        {
+          name: "Prof. Alexandre Neves Louzada",
+          subjects: ["POB", "SBD", "TFC"],
+          role: "Projeto & Banco de Dados",
+          description:
+            "Atua com projetos, orientação e desenvolvimento de soluções com banco de dados, incluindo projeto final de curso.",
+          lattes: "http://lattes.cnpq.br/1124436137962731",
+        },
+        {
+          name: "Prof. Miguel Gabriel Prazeres de Carvalho",
+          subjects: ["POA", "TAV", "PDM"],
+          role: "Projeto & Desenvolvimento",
+          description:
+            "Atua com práticas de desenvolvimento e projetos aplicados, conectando conteúdos técnicos com desafios do mercado.",
+          lattes: "http://lattes.cnpq.br/3964775530688287",
         },
         {
           name: "Prof(a). Claudia Ferlin",
@@ -83,6 +107,14 @@ export default function AboutPage() {
           description:
             "Especialista em Arquitetura de Computadores (Von Neumann) e funcionamento interno de Sistemas Operacionais.",
           lattes: "http://lattes.cnpq.br/9169990426085895",
+        },
+        {
+          name: "Prof. Wagner da Silva Zanco",
+          subjects: ["MAB", "CAL", "ALG"],
+          role: "Matemática Aplicada",
+          description:
+            "Atua com fundamentos matemáticos e computacionais, apoiando a formação técnica nas bases de cálculo e álgebra.",
+          lattes: "http://lattes.cnpq.br/1319131305448487",
         },
         {
           name: "Prof. Maria Cláudia Roenick Guimarães",
