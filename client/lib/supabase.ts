@@ -16,6 +16,9 @@ export interface Post {
   slug: string;
   content: string;
   cover_image?: string;
+  attachment_pdf_path?: string;
+  attachment_pdf_name?: string;
+  attachment_pdf_size?: number;
   status: 'draft' | 'published';
   author?: string;
   created_at: string;
@@ -27,6 +30,9 @@ export interface CreatePostInput {
   slug: string;
   content: string;
   cover_image?: string;
+  attachment_pdf_path?: string;
+  attachment_pdf_name?: string;
+  attachment_pdf_size?: number;
   status: 'draft' | 'published';
   author?: string;
 }

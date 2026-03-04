@@ -10,7 +10,8 @@ import {
   User, 
   ArrowLeft,
   Share2,
-  Clock
+  Clock,
+  Paperclip
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -21,6 +22,7 @@ export default function PostDetailPage() {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [downloadingAttachment, setDownloadingAttachment] = useState(false);
 
   useEffect(() => {
     // Scroll to top when component mounts or slug changes
@@ -72,6 +74,34 @@ export default function PostDetailPage() {
     } else {
       navigator.clipboard.writeText(window.location.href);
       alert('Link copiado para a área de transferência!');
+    }
+  };
+
+  const handleDownloadAttachment = async () => {
+    if (!post?.attachment_pdf_path) return;
+
+    setDownloadingAttachment(true);
+    try {
+      const { data, error } = await supabase.storage
+        .from('cms-pdfs')
+        .download(post.attachment_pdf_path);
+
+      if (error) throw error;
+      if (!data) throw new Error('Falha ao baixar o arquivo');
+
+      const blobUrl = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = post.attachment_pdf_name || 'anexo.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error('Erro ao baixar anexo:', err);
+      alert('Erro ao baixar anexo. Tente novamente.');
+    } finally {
+      setDownloadingAttachment(false);
     }
   };
 
@@ -191,6 +221,34 @@ export default function PostDetailPage() {
               html={post.content}
               className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80 prose-p:whitespace-pre-wrap prose-li:whitespace-pre-wrap"
             />
+
+            {post.attachment_pdf_path && (
+              <div className="mt-10 pt-6 border-t border-border">
+                <h3 className="text-base font-semibold text-foreground mb-3">Anexo</h3>
+                <button
+                  type="button"
+                  onClick={handleDownloadAttachment}
+                  disabled={downloadingAttachment}
+                  className="w-full flex items-center justify-between gap-3 rounded-lg border border-border px-4 py-3 hover:bg-secondary/40 transition-colors disabled:opacity-60"
+                >
+                  <span className="flex items-center gap-2 min-w-0">
+                    {downloadingAttachment ? (
+                      <Loader2 className="w-4 h-4 animate-spin text-primary" />
+                    ) : (
+                      <Paperclip className="w-4 h-4 text-primary" />
+                    )}
+                    <span className="truncate text-left">
+                      {post.attachment_pdf_name || 'Anexo.pdf'}
+                    </span>
+                  </span>
+                  <span className="text-xs text-foreground/50">
+                    {(post.attachment_pdf_size || 0) > 0
+                      ? `${Math.round((post.attachment_pdf_size || 0) / 1024)} KB`
+                      : 'PDF'}
+                  </span>
+                </button>
+              </div>
+            )}
           </motion.article>
 
           {/* Footer */}

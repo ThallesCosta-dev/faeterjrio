@@ -15,7 +15,7 @@ CREATE TABLE profiles (
     email TEXT UNIQUE,
     full_name TEXT,
     institutional_email TEXT,
-    role TEXT DEFAULT 'viewer' CHECK (role IN ('admin', 'editor', 'viewer')),
+    role TEXT DEFAULT 'editor' CHECK (role IN ('admin', 'editor', 'viewer')),
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -83,10 +83,14 @@ USING (bucket_id = 'cms-images');
 CREATE POLICY "Admins gerenciam imagens" ON storage.objects FOR ALL TO authenticated
 USING (bucket_id = 'cms-images' AND EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'));
 
--- 7. Usuário admin inicial
+-- 7. Usuários admin iniciais
 INSERT INTO profiles (email, full_name, institutional_email, role)
 VALUES ('admin@faeterj-rio.edu.br', 'Administrador', 'admin@faeterj-rio.edu.br', 'admin')
 ON CONFLICT (email) DO NOTHING;
+
+INSERT INTO profiles (email, full_name, institutional_email, role)
+VALUES ('ricardo.marciano@faeterj-rio.edu.br', 'Ricardo Marciano', 'ricardo.marciano@faeterj-rio.edu.br', 'admin')
+ON CONFLICT (email) DO UPDATE SET role = EXCLUDED.role;
 
 -- 8. Verificação
 SELECT 'Database criado com sucesso!' as status;

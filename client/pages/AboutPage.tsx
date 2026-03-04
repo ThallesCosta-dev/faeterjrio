@@ -56,10 +56,10 @@ export default function AboutPage() {
         },
         {
           name: "Prof. Marcio Belo Rodrigues da Silva",
-          subjects: ["REQ", "MOD", "POB"],
-          role: "Arquitetura de Software",
+          subjects: ["REQ", "MOD", "POB", "TFC", "DAW"],
+          role: "Engenharia de Software",
           description:
-            "Especialista em Análise e Modelagem. Ensina os fundamentos da Orientação a Objetos e estruturas de requisitos.",
+            "Atua com engenharia de requisitos, modelagem e desenvolvimento de aplicações web e banco de dados.",
           lattes: "http://lattes.cnpq.br/4659414483766533",
         },
         {
@@ -71,11 +71,11 @@ export default function AboutPage() {
           lattes: "http://lattes.cnpq.br/1124436137962731",
         },
         {
-          name: "Prof. Miguel Gabriel Prazeres de Carvalho",
-          subjects: ["POA", "TAV", "PDM"],
-          role: "Projeto & Desenvolvimento",
+          name: "Prof. Miguel Carvalho",
+          subjects: ["POA", "TAV", "PDM", "TFC"],
+          role: "Inovação & Desenvolvimento",
           description:
-            "Atua com práticas de desenvolvimento e projetos aplicados, conectando conteúdos técnicos com desafios do mercado.",
+            "Atua com práticas inovadoras de desenvolvimento e projetos aplicados ao mais diversos setores, conectando conteúdos técnicos com desafios do mercado.",
           lattes: "http://lattes.cnpq.br/3964775530688287",
         },
         {
@@ -87,7 +87,7 @@ export default function AboutPage() {
           lattes: "http://lattes.cnpq.br/4781864789335595",
         },
         {
-          name: "Prof. Leonardo Soares Vianna",
+          name: "Prof. Leonardo Vianna",
           subjects: ["FAC", "FPR"],
           role: "Lógica de Programação",
           description:
@@ -245,7 +245,7 @@ export default function AboutPage() {
 
       {/* Faculty Section - Design Original com Dados Novos */}
       <section className="py-20 bg-secondary/20">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
