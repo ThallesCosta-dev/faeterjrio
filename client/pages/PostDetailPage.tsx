@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { supabase, Post } from '@/lib/supabase';
+import { supabase, Post, PostAttachment } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { RichTextViewer } from '@/components/RichTextViewer';
@@ -20,6 +20,7 @@ import { motion } from 'framer-motion';
 export default function PostDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<Post | null>(null);
+  const [attachments, setAttachments] = useState<PostAttachment[]>([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [downloadingAttachment, setDownloadingAttachment] = useState(false);
@@ -51,6 +52,15 @@ export default function PostDetailPage() {
         }
       } else {
         setPost(data);
+
+        const { data: attachmentsData, error: attachmentsError } = await supabase
+          .from('post_attachments')
+          .select('*')
+          .eq('post_id', data.id)
+          .order('created_at', { ascending: true });
+
+        if (attachmentsError) throw attachmentsError;
+        setAttachments((attachmentsData as PostAttachment[]) || []);
       }
     } catch (err: any) {
       console.error('Erro ao carregar post:', err);
@@ -77,14 +87,14 @@ export default function PostDetailPage() {
     }
   };
 
-  const handleDownloadAttachment = async () => {
-    if (!post?.attachment_pdf_path) return;
+  const handleDownloadAttachment = async (attachment: PostAttachment) => {
+    if (!attachment.file_path) return;
 
     setDownloadingAttachment(true);
     try {
       const { data, error } = await supabase.storage
         .from('cms-pdfs')
-        .download(post.attachment_pdf_path);
+        .download(attachment.file_path);
 
       if (error) throw error;
       if (!data) throw new Error('Falha ao baixar o arquivo');
@@ -92,7 +102,7 @@ export default function PostDetailPage() {
       const blobUrl = URL.createObjectURL(data);
       const a = document.createElement('a');
       a.href = blobUrl;
-      a.download = post.attachment_pdf_name || 'anexo.pdf';
+      a.download = attachment.file_name || 'anexo.pdf';
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -222,31 +232,32 @@ export default function PostDetailPage() {
               className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80 prose-p:whitespace-pre-wrap prose-li:whitespace-pre-wrap"
             />
 
-            {post.attachment_pdf_path && (
+            {attachments.length > 0 && (
               <div className="mt-10 pt-6 border-t border-border">
                 <h3 className="text-base font-semibold text-foreground mb-3">Anexo</h3>
-                <button
-                  type="button"
-                  onClick={handleDownloadAttachment}
-                  disabled={downloadingAttachment}
-                  className="w-full flex items-center justify-between gap-3 rounded-lg border border-border px-4 py-3 hover:bg-secondary/40 transition-colors disabled:opacity-60"
-                >
-                  <span className="flex items-center gap-2 min-w-0">
-                    {downloadingAttachment ? (
-                      <Loader2 className="w-4 h-4 animate-spin text-primary" />
-                    ) : (
-                      <Paperclip className="w-4 h-4 text-primary" />
-                    )}
-                    <span className="truncate text-left">
-                      {post.attachment_pdf_name || 'Anexo.pdf'}
-                    </span>
-                  </span>
-                  <span className="text-xs text-foreground/50">
-                    {(post.attachment_pdf_size || 0) > 0
-                      ? `${Math.round((post.attachment_pdf_size || 0) / 1024)} KB`
-                      : 'PDF'}
-                  </span>
-                </button>
+                <div className="space-y-2">
+                  {attachments.map((a) => (
+                    <button
+                      key={a.id}
+                      type="button"
+                      onClick={() => handleDownloadAttachment(a)}
+                      disabled={downloadingAttachment}
+                      className="w-full flex items-center justify-between gap-3 rounded-lg border border-border px-4 py-3 hover:bg-secondary/40 transition-colors disabled:opacity-60"
+                    >
+                      <span className="flex items-center gap-2 min-w-0">
+                        {downloadingAttachment ? (
+                          <Loader2 className="w-4 h-4 animate-spin text-primary" />
+                        ) : (
+                          <Paperclip className="w-4 h-4 text-primary" />
+                        )}
+                        <span className="truncate text-left">{a.file_name || 'Anexo.pdf'}</span>
+                      </span>
+                      <span className="text-xs text-foreground/50">
+                        {(a.file_size || 0) > 0 ? `${Math.round((a.file_size || 0) / 1024)} KB` : 'PDF'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </motion.article>

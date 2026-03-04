@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { supabase } from '@/lib/supabase';
+import { supabase, PostAttachment } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -40,15 +40,14 @@ export default function AdminEditor() {
   const [saving, setSaving] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [uploadingPdf, setUploadingPdf] = useState(false);
+
+  const [attachments, setAttachments] = useState<PostAttachment[]>([]);
   
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
     content: '',
     cover_image: '',
-    attachment_pdf_path: '',
-    attachment_pdf_name: '',
-    attachment_pdf_size: 0,
     status: 'draft' as 'draft' | 'published',
     author: '',
   });
@@ -89,12 +88,18 @@ export default function AdminEditor() {
           slug: data.slug,
           content: data.content,
           cover_image: data.cover_image || '',
-          attachment_pdf_path: data.attachment_pdf_path || '',
-          attachment_pdf_name: data.attachment_pdf_name || '',
-          attachment_pdf_size: data.attachment_pdf_size || 0,
           status: data.status,
           author: data.author || '',
         });
+
+        const { data: attachmentsData, error: attachmentsError } = await supabase
+          .from('post_attachments')
+          .select('*')
+          .eq('post_id', id)
+          .order('created_at', { ascending: true });
+
+        if (attachmentsError) throw attachmentsError;
+        setAttachments((attachmentsData as PostAttachment[]) || []);
       }
     } catch (err: any) {
       toast.error('Erro ao carregar post: ' + err.message);
@@ -105,41 +110,81 @@ export default function AdminEditor() {
   };
 
   const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    if (!postId) {
+      toast.error('Salve o post antes de anexar PDFs');
+      return;
+    }
 
-    if (file.type !== 'application/pdf') {
-      toast.error('Selecione um arquivo PDF');
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+
+    const nonPdf = files.find((f) => f.type !== 'application/pdf');
+    if (nonPdf) {
+      toast.error('Selecione apenas arquivos PDF');
       return;
     }
 
     setUploadingPdf(true);
     try {
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.pdf`;
-      const filePath = `posts/${fileName}`;
+      const newAttachments: PostAttachment[] = [];
 
-      const { error: uploadError } = await supabase.storage
-        .from('cms-pdfs')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: false,
-          contentType: 'application/pdf',
-        });
+      for (const file of files) {
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.pdf`;
+        const filePath = `posts/${postId}/${fileName}`;
 
-      if (uploadError) throw uploadError;
+        const { error: uploadError } = await supabase.storage
+          .from('cms-pdfs')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false,
+            contentType: 'application/pdf',
+          });
 
-      setFormData(prev => ({
-        ...prev,
-        attachment_pdf_path: filePath,
-        attachment_pdf_name: file.name,
-        attachment_pdf_size: file.size,
-      }));
-      toast.success('PDF anexado com sucesso!');
+        if (uploadError) throw uploadError;
+
+        const { data: inserted, error: insertError } = await supabase
+          .from('post_attachments')
+          .insert({
+            post_id: postId,
+            file_path: filePath,
+            file_name: file.name,
+            file_size: file.size,
+          })
+          .select('*')
+          .single();
+
+        if (insertError) throw insertError;
+        if (inserted) newAttachments.push(inserted as PostAttachment);
+      }
+
+      setAttachments((prev) => [...prev, ...newAttachments]);
+      toast.success('PDF(s) anexado(s) com sucesso!');
     } catch (err: any) {
       console.error('Erro no upload do PDF:', err);
       toast.error('Erro ao anexar PDF: ' + err.message);
     } finally {
       setUploadingPdf(false);
+      if (pdfInputRef.current) pdfInputRef.current.value = '';
+    }
+  };
+
+  const handleRemoveAttachment = async (attachment: PostAttachment) => {
+    try {
+      const { error } = await supabase
+        .from('post_attachments')
+        .delete()
+        .eq('id', attachment.id);
+
+      if (error) throw error;
+
+      await supabase.storage
+        .from('cms-pdfs')
+        .remove([attachment.file_path]);
+
+      setAttachments((prev) => prev.filter((a) => a.id !== attachment.id));
+      toast.success('Anexo removido');
+    } catch (err: any) {
+      toast.error('Erro ao remover anexo: ' + err.message);
     }
   };
 
@@ -209,9 +254,6 @@ export default function AdminEditor() {
         slug: formData.slug,
         content: formData.content,
         cover_image: formData.cover_image || null,
-        attachment_pdf_path: formData.attachment_pdf_path || null,
-        attachment_pdf_name: formData.attachment_pdf_name || null,
-        attachment_pdf_size: formData.attachment_pdf_size || null,
         status: formData.status,
         author: formData.author || profile?.full_name || null,
       };
@@ -225,13 +267,19 @@ export default function AdminEditor() {
         if (error) throw error;
         toast.success('Post atualizado com sucesso!');
       } else {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from('posts')
-          .insert(postData);
+          .insert(postData)
+          .select('id')
+          .single();
 
         if (error) throw error;
         toast.success('Post criado com sucesso!');
-        navigate('/admin/dashboard');
+        if (data?.id) {
+          navigate(`/admin/editor?id=${data.id}`);
+        } else {
+          navigate('/admin/dashboard');
+        }
       }
     } catch (err: any) {
       if (err.message?.includes('unique constraint')) {
@@ -412,54 +460,57 @@ export default function AdminEditor() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {formData.attachment_pdf_path ? (
-              <div className="flex items-center justify-between gap-3 border border-border rounded-lg p-3">
-                <div className="min-w-0">
-                  <p className="font-medium truncate">{formData.attachment_pdf_name || 'Anexo.pdf'}</p>
-                  <p className="text-xs text-foreground/50">
-                    {(formData.attachment_pdf_size || 0) > 0
-                      ? `${Math.round((formData.attachment_pdf_size || 0) / 1024)} KB`
-                      : ''}
-                  </p>
-                </div>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  onClick={() => {
-                    setFormData(prev => ({
-                      ...prev,
-                      attachment_pdf_path: '',
-                      attachment_pdf_name: '',
-                      attachment_pdf_size: 0,
-                    }));
-                    if (pdfInputRef.current) pdfInputRef.current.value = '';
-                  }}
-                >
-                  <X className="w-4 h-4" />
-                </Button>
+            {!postId ? (
+              <div className="rounded-lg border border-border p-4 text-sm text-foreground/60">
+                Salve o post para poder anexar PDFs.
               </div>
             ) : (
-              <div
-                onClick={() => pdfInputRef.current?.click()}
-                className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-primary/50 transition-colors"
-              >
-                {uploadingPdf ? (
-                  <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
-                ) : (
-                  <>
-                    <Paperclip className="w-8 h-8 mx-auto text-foreground/40 mb-2" />
-                    <p className="text-foreground/60">Clique para anexar um PDF</p>
-                    <p className="text-xs text-foreground/40 mt-1">Apenas PDF</p>
-                  </>
+              <>
+                {attachments.length > 0 && (
+                  <div className="space-y-2">
+                    {attachments.map((a) => (
+                      <div key={a.id} className="flex items-center justify-between gap-3 border border-border rounded-lg p-3">
+                        <div className="min-w-0">
+                          <p className="font-medium truncate">{a.file_name}</p>
+                          <p className="text-xs text-foreground/50">
+                            {(a.file_size || 0) > 0 ? `${Math.round((a.file_size || 0) / 1024)} KB` : ''}
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="text-destructive hover:text-destructive"
+                          onClick={() => handleRemoveAttachment(a)}
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
                 )}
-              </div>
+
+                <div
+                  onClick={() => pdfInputRef.current?.click()}
+                  className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-primary/50 transition-colors"
+                >
+                  {uploadingPdf ? (
+                    <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
+                  ) : (
+                    <>
+                      <Paperclip className="w-8 h-8 mx-auto text-foreground/40 mb-2" />
+                      <p className="text-foreground/60">Clique para anexar PDF(s)</p>
+                      <p className="text-xs text-foreground/40 mt-1">Apenas PDF</p>
+                    </>
+                  )}
+                </div>
+              </>
             )}
             <input
               ref={pdfInputRef}
               type="file"
               accept="application/pdf"
+              multiple
               onChange={handlePdfUpload}
               className="hidden"
             />

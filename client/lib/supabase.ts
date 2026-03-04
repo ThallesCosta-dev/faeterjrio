@@ -39,6 +39,15 @@ export interface CreatePostInput {
 
 export interface UpdatePostInput extends Partial<CreatePostInput> {}
 
+export interface PostAttachment {
+  id: string;
+  post_id: string;
+  file_path: string;
+  file_name: string;
+  file_size?: number;
+  created_at: string;
+}
+
 // Tipos para Sistema de Roles
 export type UserRole = 'admin' | 'editor' | 'viewer';
 
