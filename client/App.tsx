@@ -2,7 +2,11 @@ import "./global.css";
 
 
 
-import { Suspense, lazy } from "react";
+import { Component, Suspense, lazy } from "react";
+
+import type { ErrorInfo, ReactNode } from "react";
+
+import { Loader2 } from "lucide-react";
 
 import { Toaster } from "@/components/ui/toaster";
 
@@ -42,17 +46,75 @@ import PostDetailPage from "./pages/PostDetailPage";
 
 
 
-const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+// Recarrega a página uma vez quando um chunk falha ao carregar (ex: build novo
+// no servidor invalidou os arquivos com hash antigos que o navegador tinha em cache)
+const lazyWithRetry = (factory: () => Promise<{ default: React.ComponentType<any> }>) =>
+  lazy(async () => {
+    try {
+      const module = await factory();
+      sessionStorage.removeItem("chunk-reload");
+      return module;
+    } catch (error) {
+      if (!sessionStorage.getItem("chunk-reload")) {
+        sessionStorage.setItem("chunk-reload", "1");
+        window.location.reload();
+        return new Promise(() => {}) as never;
+      }
+      throw error;
+    }
+  });
 
-const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
+const AdminLogin = lazyWithRetry(() => import("./pages/admin/AdminLogin"));
 
-const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminLayout = lazyWithRetry(() => import("./pages/admin/AdminLayout"));
 
-const AdminEditor = lazy(() => import("./pages/admin/AdminEditor"));
+const AdminDashboard = lazyWithRetry(() => import("./pages/admin/AdminDashboard"));
 
-const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminEditor = lazyWithRetry(() => import("./pages/admin/AdminEditor"));
 
-const AdminSetup = lazy(() => import("./pages/admin/AdminSetup"));
+const AdminUsers = lazyWithRetry(() => import("./pages/admin/AdminUsers"));
+
+const AdminSetup = lazyWithRetry(() => import("./pages/admin/AdminSetup"));
+
+const PageLoader = () => (
+  <div className="min-h-screen flex flex-col items-center justify-center gap-3">
+    <Loader2 className="w-8 h-8 animate-spin text-primary" />
+    <p className="text-sm text-foreground/60">Carregando...</p>
+  </div>
+);
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Erro não tratado na aplicação:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-4 text-center">
+          <h1 className="text-2xl font-bold">Algo deu errado</h1>
+          <p className="text-foreground/60 max-w-md">
+            Ocorreu um erro inesperado ao carregar a página. Tente recarregar.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            Recarregar página
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 
 
@@ -100,7 +162,9 @@ const App = () => (
 
       <BrowserRouter>
 
-        <Suspense fallback={<div className="min-h-screen" />}>
+        <ErrorBoundary>
+
+        <Suspense fallback={<PageLoader />}>
 
           <Routes>
 
@@ -325,6 +389,8 @@ const App = () => (
           </Routes>
 
         </Suspense>
+
+        </ErrorBoundary>
 
       </BrowserRouter>
 
