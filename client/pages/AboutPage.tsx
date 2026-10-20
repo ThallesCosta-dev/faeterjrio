@@ -10,7 +10,7 @@ export default function AboutPage() {
       members: [
         {
           name: "Prof. Alfredo Nazareno Pereira Boente",
-          subjects: ["ADS", "UBD", "SEG"],
+          subjects: ["ADS", "UBD", "SEG", "MAB"],
           role: "Gestão de TI & Segurança",
           description:
             "Doutor em Engenharia de Produção (COPPE/UFRJ). Especialista em administração de dados, segurança da informação e lógica fuzzy aplicada à gestão.",
@@ -64,7 +64,7 @@ export default function AboutPage() {
         },
         {
           name: "Prof. Alexandre Neves Louzada",
-          subjects: ["POB", "SBD", "TFC"],
+          subjects: ["POB", "SBD"],
           role: "Projeto & Banco de Dados",
           description:
             "Atua com projetos, orientação e desenvolvimento de soluções com banco de dados, incluindo projeto final de curso.",
@@ -72,7 +72,7 @@ export default function AboutPage() {
         },
         {
           name: "Prof. Miguel Carvalho",
-          subjects: ["POA", "TAV", "PDM", "TFC"],
+          subjects: ["POA", "TAV", "PDM"],
           role: "Inovação & Desenvolvimento",
           description:
             "Atua com práticas inovadoras de desenvolvimento e projetos aplicados ao mais diversos setores, conectando conteúdos técnicos com desafios do mercado.",
@@ -110,7 +110,7 @@ export default function AboutPage() {
         },
         {
           name: "Prof. Wagner da Silva Zanco",
-          subjects: ["MAB", "CAL", "ALG"],
+          subjects: ["CAL", "ALG"],
           role: "Matemática Aplicada",
           description:
             "Atua com fundamentos matemáticos e computacionais, apoiando a formação técnica nas bases de cálculo e álgebra.",
@@ -118,7 +118,7 @@ export default function AboutPage() {
         },
         {
           name: "Prof. Maria Cláudia Roenick Guimarães",
-          subjects: ["RSD", "SEG", "PBD"],
+          subjects: ["RSD", "SEG"],
           role: "Redes & CyberSec",
           description:
             "Foca em Redes de Computadores, protocolos de comunicação e Segurança da Informação corporativa.",
@@ -131,6 +131,14 @@ export default function AboutPage() {
           description:
             "Mestre em Ensino de Matemática. Atua com Estatística aplicada a dados e Álgebra Linear.",
           lattes: "http://lattes.cnpq.br/3412930630193167",
+        },
+        {
+          name: "Prof. José Wilson Coura Pinto",
+          subjects: ["MAB", "TAV", "TFC"],
+          role: "Algoritmos & Grafos",
+          description:
+            "Doutor em Engenharia de Sistemas e Computação (UFRJ). Especialista em Algoritmos, Teoria dos Grafos e Inteligência Computacional, com atuação em Matemática Aplicada e Ciência de Dados.",
+          lattes: "http://lattes.cnpq.br/0431627623206228",
         },
       ],
     },
@@ -235,7 +243,7 @@ export default function AboutPage() {
 
               <div className="bg-secondary/30 p-8 rounded-2xl border border-primary/10 my-8">
                 <p className="text-sm text-foreground/70 italic border-l-4 border-primary pl-4">
-                  Grade curricular ativa referente ao semestre letivo <strong>2026.1</strong>. As siglas das disciplinas seguem o Ementário Oficial 2018 (ex: <strong>PJS</strong> = Projeto de Sistemas).
+                  Grade curricular ativa referente ao semestre letivo <strong>2026.2</strong>. As siglas das disciplinas seguem o Ementário Oficial 2018 (ex: <strong>PJS</strong> = Projeto de Sistemas).
                 </p>
               </div>
             </div>
@@ -253,7 +261,7 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl font-bold text-primary mb-4">
-              Docentes 2026.1
+              Docentes 2026.2
             </h2>
             <p className="text-foreground/60 text-lg">
               Excelência acadêmica e prática de mercado
@@ -341,7 +349,7 @@ export default function AboutPage() {
 
           <div className="text-center mt-16 pt-8 border-t border-primary/10">
             <p className="text-xs text-foreground/40 max-w-3xl mx-auto">
-              * Dados baseados na Grade de Horário 2026.1 e Ementário 2018. A
+              * Dados baseados na Grade de Horário 2026.2 e Ementário 2018. A
               titulação e os currículos são de responsabilidade dos docentes na
               Plataforma Lattes/CNPq.
             </p>

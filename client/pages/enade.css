@@ -1,0 +1,739 @@
+/* ===== ENADE Quiz — scoped styles ===== */
+
+:root {
+  --enade-primary: #304a83;
+  --enade-primary-dark: #233863;
+  --enade-primary-soft: rgba(48, 74, 131, 0.08);
+  --enade-primary-fg: #ffffff;
+  --enade-foreground: #1d2b47;
+  --enade-muted: #dfe4eb;
+  --enade-muted-fg: #62708a;
+  --enade-secondary: #eff2f6;
+  --enade-border: #e6eaf0;
+  --enade-card: #ffffff;
+  --enade-radius: 0.5rem;
+  --enade-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --enade-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --enade-ok: #15803d;
+  --enade-ok-bg: #ecfdf3;
+  --enade-ok-line: #bbe7cc;
+  --enade-bad: #dc2626;
+  --enade-bad-bg: #fef2f2;
+  --enade-bad-line: #f5c6c6;
+  --enade-warn: #b45309;
+  --enade-warn-bg: #fffbeb;
+  --enade-warn-line: #fde68a;
+}
+
+/* ===== Hero ===== */
+
+.enade-hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    var(--enade-primary) 0%,
+    rgba(48, 74, 131, 0.92) 55%,
+    rgba(48, 74, 131, 0.82) 100%
+  );
+}
+
+.enade-net {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.enade-net svg {
+  width: 100%;
+  height: 100%;
+}
+
+.enade-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.enade-glow-a {
+  width: 420px;
+  height: 420px;
+  top: -200px;
+  right: -160px;
+}
+
+.enade-glow-b {
+  width: 320px;
+  height: 320px;
+  bottom: -160px;
+  left: -120px;
+}
+
+.enade-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 18px;
+}
+
+.enade-hero-title {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-size: clamp(28px, 4.5vw, 50px);
+  font-weight: 700;
+  line-height: 1.15;
+  max-width: 760px;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.enade-hero-lead {
+  font-size: clamp(15px, 1.6vw, 19px);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 680px;
+  margin: 0 0 30px;
+  line-height: 1.65;
+}
+
+.enade-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.enade-statrow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 40px;
+  max-width: 760px;
+}
+
+@media (min-width: 640px) {
+  .enade-statrow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.enade-stat {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--enade-radius);
+  padding: 14px 16px;
+  backdrop-filter: blur(4px);
+}
+
+.enade-stat b {
+  display: block;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.enade-stat span {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.enade-stat-ok { color: #b5f5c9; }
+.enade-stat-bad { color: #ffc9c9; }
+
+/* ===== Buttons ===== */
+
+.enade-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--enade-border);
+  background: var(--enade-card);
+  color: var(--enade-foreground);
+  border-radius: var(--enade-radius);
+  padding: 9px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.enade-btn:hover {
+  border-color: var(--enade-primary);
+  color: var(--enade-primary);
+  background: var(--enade-primary-soft);
+}
+
+.enade-btn-primary {
+  background: var(--enade-primary);
+  border-color: var(--enade-primary);
+  color: #fff;
+}
+
+.enade-btn-primary:hover {
+  background: var(--enade-primary-dark);
+  border-color: var(--enade-primary-dark);
+  color: #fff;
+}
+
+.enade-btn-white {
+  background: #fff;
+  color: var(--enade-primary);
+  border-color: #fff;
+  font-weight: 700;
+  padding: 14px 28px;
+  font-size: 15px;
+  box-shadow: var(--enade-shadow);
+}
+
+.enade-btn-white:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
+}
+
+.enade-btn-white-outline {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 700;
+  padding: 14px 28px;
+  font-size: 15px;
+}
+
+.enade-btn-white-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.enade-btn-small {
+  padding: 6px 12px;
+  font-size: 12.5px;
+}
+
+.enade-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+/* ===== Section ===== */
+
+.enade-section {
+  padding: 40px 0 10px;
+}
+
+.enade-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.enade-section-head h2 {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 700;
+  color: var(--enade-foreground);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.enade-section-head p {
+  margin: 4px 0 0;
+  color: var(--enade-muted-fg);
+  font-size: 14.5px;
+}
+
+.enade-kicker {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--enade-primary);
+  margin-bottom: 6px;
+}
+
+/* ===== Year headers ===== */
+
+.enade-year {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--enade-muted-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 30px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.enade-year::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--enade-border);
+}
+
+/* ===== Card grid ===== */
+
+.enade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.enade-card {
+  background: var(--enade-card);
+  border: 1px solid var(--enade-border);
+  border-radius: var(--enade-radius);
+  padding: 18px;
+  box-shadow: var(--enade-shadow);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+}
+
+.enade-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--enade-shadow-lg);
+  border-color: rgba(48, 74, 131, 0.35);
+}
+
+.enade-card-title {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--enade-foreground);
+}
+
+.enade-card-meta {
+  color: var(--enade-muted-fg);
+  font-size: 13px;
+}
+
+/* ===== Progress bar ===== */
+
+.enade-pbar {
+  height: 7px;
+  background: var(--enade-secondary);
+  border-radius: 99px;
+  overflow: hidden;
+  display: flex;
+}
+
+.enade-pbar div { height: 100%; }
+.enade-pbar-ok { background: var(--enade-ok); }
+.enade-pbar-bad { background: var(--enade-bad); }
+
+.enade-cardstats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--enade-muted-fg);
+}
+
+/* ===== Tags ===== */
+
+.enade-tag {
+  display: inline-block;
+  background: var(--enade-secondary);
+  color: var(--enade-primary);
+  border-radius: 6px;
+  padding: 2px 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.enade-tag-done {
+  background: var(--enade-ok-bg);
+  color: var(--enade-ok);
+}
+
+.enade-tagrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== Quiz head ===== */
+
+.enade-quizhead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 22px 0 10px;
+}
+
+.enade-where {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.enade-area {
+  color: var(--enade-muted-fg);
+  font-size: 13px;
+  background: var(--enade-secondary);
+  border-radius: 6px;
+  padding: 2px 9px;
+  font-weight: 600;
+}
+
+.enade-score {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.enade-score-ok { color: var(--enade-ok); }
+.enade-score-bad { color: var(--enade-bad); }
+.enade-score-tot { color: var(--enade-muted-fg); font-weight: 500; }
+
+/* ===== Quiz card ===== */
+
+.enade-qcard {
+  background: var(--enade-card);
+  border: 1px solid var(--enade-border);
+  border-radius: var(--enade-radius);
+  box-shadow: var(--enade-shadow);
+  overflow: hidden;
+}
+
+.enade-qtop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--enade-border);
+  flex-wrap: wrap;
+  background: #fafbfd;
+}
+
+.enade-qnum {
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.enade-qnum small {
+  color: var(--enade-muted-fg);
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+}
+
+/* ===== Badges ===== */
+
+.enade-badge {
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 6px;
+  padding: 3px 9px;
+  letter-spacing: 0.05em;
+}
+
+.enade-badge-anulada {
+  background: var(--enade-warn-bg);
+  color: var(--enade-warn);
+  border: 1px solid var(--enade-warn-line);
+}
+
+.enade-badge-resp-ok {
+  background: var(--enade-ok-bg);
+  color: var(--enade-ok);
+  border: 1px solid var(--enade-ok-line);
+}
+
+.enade-badge-resp-bad {
+  background: var(--enade-bad-bg);
+  color: var(--enade-bad);
+  border: 1px solid var(--enade-bad-line);
+}
+
+/* ===== Question images ===== */
+
+.enade-qimgs {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fff;
+}
+
+.enade-qimgs img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+/* ===== Answer buttons ===== */
+
+.enade-answers {
+  display: flex;
+  gap: 10px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--enade-border);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.enade-alt {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--enade-border);
+  background: #fff;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--enade-foreground);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.enade-alt:hover:not(:disabled) {
+  border-color: var(--enade-primary);
+  color: var(--enade-primary);
+  background: var(--enade-primary-soft);
+}
+
+.enade-alt-sel {
+  background: var(--enade-primary);
+  border-color: var(--enade-primary);
+  color: #fff;
+}
+
+.enade-alt-correct {
+  background: var(--enade-ok);
+  border-color: var(--enade-ok);
+  color: #fff;
+}
+
+.enade-alt-wrong {
+  background: var(--enade-bad);
+  border-color: var(--enade-bad);
+  color: #fff;
+}
+
+.enade-alt-dim {
+  opacity: 0.4;
+}
+
+.enade-alt:disabled {
+  cursor: default;
+}
+
+@media (max-width: 640px) {
+  .enade-alt {
+    width: 42px;
+    height: 42px;
+  }
+
+  .enade-cta .enade-btn {
+    width: 100%;
+  }
+}
+
+/* ===== Feedback ===== */
+
+.enade-feedback {
+  padding: 0 18px 16px;
+  font-weight: 600;
+}
+
+.enade-feedback-ok { color: var(--enade-ok); }
+.enade-feedback-bad { color: var(--enade-bad); }
+.enade-feedback-warn { color: var(--enade-warn); }
+
+/* ===== Navigation row ===== */
+
+.enade-navrow {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ===== Navigation grid (chip map) ===== */
+
+.enade-navgrid {
+  background: var(--enade-card);
+  border: 1px solid var(--enade-border);
+  border-radius: var(--enade-radius);
+  box-shadow: var(--enade-shadow);
+  padding: 16px;
+  margin: 16px 0 36px;
+}
+
+.enade-navgrid-label {
+  font-size: 12px;
+  color: var(--enade-muted-fg);
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.enade-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.enade-chip {
+  min-width: 36px;
+  height: 32px;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: 1px solid var(--enade-border);
+  background: #fff;
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+  color: var(--enade-foreground);
+  transition: all 0.12s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.enade-chip:hover {
+  border-color: var(--enade-primary);
+}
+
+.enade-chip-cur {
+  outline: 3px solid rgba(48, 74, 131, 0.3);
+  border-color: var(--enade-primary);
+}
+
+.enade-chip-ok {
+  background: var(--enade-ok-bg);
+  border-color: var(--enade-ok-line);
+  color: var(--enade-ok);
+}
+
+.enade-chip-bad {
+  background: var(--enade-bad-bg);
+  border-color: var(--enade-bad-line);
+  color: var(--enade-bad);
+}
+
+.enade-chip-anu {
+  background: var(--enade-warn-bg);
+  border-color: var(--enade-warn-line);
+  color: var(--enade-warn);
+}
+
+/* ===== Filters ===== */
+
+.enade-filters {
+  background: var(--enade-card);
+  border: 1px solid var(--enade-border);
+  border-radius: var(--enade-radius);
+  padding: 12px 14px;
+  margin: 18px 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: var(--enade-shadow);
+}
+
+.enade-filters select {
+  border: 1px solid var(--enade-border);
+  border-radius: var(--enade-radius);
+  padding: 8px 10px;
+  font-weight: 500;
+  font-size: 13.5px;
+  background: #fff;
+  color: var(--enade-foreground);
+  font-family: inherit;
+}
+
+.enade-filters select:focus {
+  outline: 2px solid var(--enade-primary);
+  outline-offset: 1px;
+}
+
+.enade-ck {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 13.5px;
+  color: var(--enade-muted-fg);
+  cursor: pointer;
+}
+
+.enade-filters input[type="checkbox"] {
+  accent-color: var(--enade-primary);
+}
+
+/* ===== Empty state ===== */
+
+.enade-empty {
+  background: var(--enade-card);
+  border: 1px dashed var(--enade-border);
+  border-radius: var(--enade-radius);
+  padding: 48px;
+  text-align: center;
+  color: var(--enade-muted-fg);
+  margin: 16px 0;
+}
+
+/* ===== Keyboard hint ===== */
+
+.enade-note {
+  color: var(--enade-muted-fg);
+  font-size: 13px;
+  text-align: center;
+  margin: 30px 0 40px;
+}
+
+.enade-note kbd {
+  background: var(--enade-secondary);
+  border: 1px solid var(--enade-border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0 6px;
+  font-size: 11.5px;
+  font-family: inherit;
+  color: var(--enade-foreground);
+}

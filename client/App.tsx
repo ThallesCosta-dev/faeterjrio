@@ -44,6 +44,8 @@ import ComunicadosPage from "./pages/ComunicadosPage";
 
 import PostDetailPage from "./pages/PostDetailPage";
 
+import EnadePage from "./pages/EnadePage";
+
 
 
 // Recarrega a página uma vez quando um chunk falha ao carregar (ex: build novo
@@ -73,6 +75,8 @@ const AdminDashboard = lazyWithRetry(() => import("./pages/admin/AdminDashboard"
 const AdminEditor = lazyWithRetry(() => import("./pages/admin/AdminEditor"));
 
 const AdminUsers = lazyWithRetry(() => import("./pages/admin/AdminUsers"));
+
+const AdminHorarios = lazyWithRetry(() => import("./pages/admin/AdminHorarios"));
 
 const AdminSetup = lazyWithRetry(() => import("./pages/admin/AdminSetup"));
 
@@ -318,6 +322,22 @@ const App = () => (
 
           <Route path="/contact" element={<Navigate to="/contato" replace />} />
 
+          <Route
+
+            path="/enade"
+
+            element={
+
+              <Layout>
+
+                <EnadePage />
+
+              </Layout>
+
+            }
+
+          />
+
           {/* CMS - Public Routes */}
 
           <Route
@@ -365,6 +385,8 @@ const App = () => (
             <Route path="editor" element={<AdminEditor />} />
 
             <Route path="users" element={<AdminUsers />} />
+
+            <Route path="horarios" element={<AdminHorarios />} />
 
           </Route>
 

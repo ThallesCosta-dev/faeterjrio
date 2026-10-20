@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { Loader2, LogOut, LayoutDashboard, FileText, GraduationCap, Users, Shield } from 'lucide-react';
+import { Loader2, LogOut, LayoutDashboard, FileText, GraduationCap, Users, Shield, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useRole } from '@/hooks/useRole';
 import { Badge } from '@/components/ui/badge';
@@ -113,6 +113,15 @@ export default function AdminLayout() {
               label="Novo Post"
               onClick={() => navigate('/admin/editor')}
               active={isActive('/admin/editor')}
+            />
+          )}
+
+          {(role === 'admin' || role === 'editor') && (
+            <NavButton
+              icon={<Clock className="w-5 h-5" />}
+              label="Atualizar Horários"
+              onClick={() => navigate('/admin/horarios')}
+              active={isActive('/admin/horarios')}
             />
           )}
 

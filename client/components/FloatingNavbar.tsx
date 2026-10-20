@@ -28,6 +28,8 @@ export function FloatingNavbar() {
 
     { label: "Ementas", href: "/matriz-ementas" },
 
+    { label: "Simulado Enade", href: "/enade" },
+
     {
 
       label: "Central de Atendimento",
