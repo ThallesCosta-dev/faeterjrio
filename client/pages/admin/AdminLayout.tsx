@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { Loader2, LogOut, LayoutDashboard, FileText, GraduationCap, Users, Shield, Clock } from 'lucide-react';
+import { Loader2, LogOut, LayoutDashboard, FileText, GraduationCap, Users, Shield, Clock, ClipboardList } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useRole } from '@/hooks/useRole';
 import { Badge } from '@/components/ui/badge';
@@ -122,6 +122,15 @@ export default function AdminLayout() {
               label="Atualizar Horários"
               onClick={() => navigate('/admin/horarios')}
               active={isActive('/admin/horarios')}
+            />
+          )}
+
+          {(role === 'admin' || role === 'editor') && (
+            <NavButton
+              icon={<ClipboardList className="w-5 h-5" />}
+              label="Simulados ENADE"
+              onClick={() => navigate('/admin/simulados')}
+              active={location.pathname.startsWith('/admin/simulados')}
             />
           )}
 

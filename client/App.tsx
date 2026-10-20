@@ -80,6 +80,12 @@ const AdminHorarios = lazyWithRetry(() => import("./pages/admin/AdminHorarios"))
 
 const AdminSetup = lazyWithRetry(() => import("./pages/admin/AdminSetup"));
 
+const AdminSimulados = lazyWithRetry(() => import("./pages/admin/AdminSimulados"));
+
+const AdminSimuladoDetail = lazyWithRetry(() => import("./pages/admin/AdminSimuladoDetail"));
+
+const SimuladoPage = lazyWithRetry(() => import("./pages/SimuladoPage"));
+
 const PageLoader = () => (
   <div className="min-h-screen flex flex-col items-center justify-center gap-3">
     <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -338,6 +344,10 @@ const App = () => (
 
           />
 
+          {/* Simulado ENADE - Public (sem layout, UI própria) */}
+
+          <Route path="/simulado/:id" element={<SimuladoPage />} />
+
           {/* CMS - Public Routes */}
 
           <Route
@@ -387,6 +397,10 @@ const App = () => (
             <Route path="users" element={<AdminUsers />} />
 
             <Route path="horarios" element={<AdminHorarios />} />
+
+            <Route path="simulados" element={<AdminSimulados />} />
+
+            <Route path="simulados/:id" element={<AdminSimuladoDetail />} />
 
           </Route>
 
