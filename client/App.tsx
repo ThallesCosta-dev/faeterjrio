@@ -78,8 +78,6 @@ const AdminUsers = lazyWithRetry(() => import("./pages/admin/AdminUsers"));
 
 const AdminHorarios = lazyWithRetry(() => import("./pages/admin/AdminHorarios"));
 
-const AdminSetup = lazyWithRetry(() => import("./pages/admin/AdminSetup"));
-
 const AdminSimulados = lazyWithRetry(() => import("./pages/admin/AdminSimulados"));
 
 const AdminSimuladoDetail = lazyWithRetry(() => import("./pages/admin/AdminSimuladoDetail"));
@@ -385,8 +383,6 @@ const App = () => (
           {/* CMS - Admin Routes */}
 
           <Route path="/admin/login" element={<AdminLogin />} />
-
-          <Route path="/admin/setup" element={<AdminSetup />} />
 
           <Route path="/admin" element={<AdminLayout />}>
 

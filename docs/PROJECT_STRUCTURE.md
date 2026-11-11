@@ -39,8 +39,7 @@ faeterjrio/
 │   │   │   ├── AdminLogin.tsx  # Login admin
 │   │   │   ├── AdminDashboard.tsx # Dashboard
 │   │   │   ├── AdminEditor.tsx # Editor de posts
-│   │   │   ├── AdminUsers.tsx  # Gestão de usuários
-│   │   │   └── AdminSetup.tsx  # Setup inicial
+│   │   │   └── AdminUsers.tsx  # Gestão de usuários
 │   │   ├── AboutPage.tsx       # Sobre nós
 │   │   ├── AdmissionPage.tsx   # Admissão
 │   │   ├── ComunicadosPage.tsx # Lista de comunicados
