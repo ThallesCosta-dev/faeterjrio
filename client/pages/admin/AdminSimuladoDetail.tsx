@@ -23,7 +23,7 @@ import {
   type ProgressoClassificacao,
 } from "@/lib/simuladoApi";
 import {
-  corrigir, topicoDe, type QuestaoTopico, type Simulado, type SimuladoParticipante, type SimuladoResposta,
+  corrigir, formatarPct, topicoDe, type QuestaoTopico, type Simulado, type SimuladoParticipante, type SimuladoResposta,
 } from "@shared/simulado";
 import { StatusBadge } from "@/components/simulado/StatusBadge";
 
@@ -320,7 +320,7 @@ export default function AdminSimuladoDetail() {
                             {topicos[q.key]?.explicacao && (
                               <details className="text-xs text-muted-foreground mt-1">
                                 <summary className="cursor-pointer text-primary">Por que {q.ans}?</summary>
-                                <p className="mt-1">{topicos[q.key]!.explicacao}</p>
+                                <p className="mt-1 whitespace-pre-line">{topicos[q.key]!.explicacao}</p>
                               </details>
                             )}
                           </td>
@@ -366,7 +366,7 @@ function Estatistica({ rotulo, valor }: { rotulo: string; valor: number }) {
   return (
     <Card>
       <CardContent className="py-4">
-        <p className="text-2xl font-bold tabular-nums">{valor.toFixed(1)}%</p>
+        <p className="text-2xl font-bold tabular-nums">{formatarPct(valor)}</p>
         <p className="text-xs text-muted-foreground">{rotulo}</p>
       </CardContent>
     </Card>
@@ -450,7 +450,7 @@ function Ranking({
                     </td>
                     <td className="py-2 text-center tabular-nums">{r.acertos}/{r.total}</td>
                     <td className={cn("py-2 text-center font-bold tabular-nums", Number(r.nota) >= 60 ? "text-green-600" : Number(r.nota) >= 40 ? "text-amber-600" : "text-red-600")}>
-                      {Number(r.nota).toFixed(1)}%
+                      {formatarPct(r.nota)}
                     </td>
                     <td className="py-2 text-xs hidden md:table-cell">
                       {pior ? `${pior.topico} (${pct(pior.acertos, pior.total)}%)` : "—"}
@@ -507,7 +507,7 @@ function Ranking({
           <AlertDialogHeader>
             <AlertDialogTitle>Liberar nova tentativa?</AlertDialogTitle>
             <AlertDialogDescription>
-              A resposta de {resetar?.email} (nota {Number(resetar?.nota ?? 0).toFixed(1)}%) e o feedback dela serão
+              A resposta de {resetar?.email} (nota {formatarPct(resetar?.nota ?? 0)}) e o feedback dela serão
               apagados, e o aluno poderá fazer o simulado de novo.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -613,7 +613,7 @@ function Participantes({
                     <td className="py-2 font-mono text-xs">{p.matricula ?? "—"}</td>
                     <td className="py-2 text-xs">
                       {nota !== undefined ? (
-                        <span className="text-green-700 font-medium">Respondeu · {nota.toFixed(1)}%</span>
+                        <span className="text-green-700 font-medium">Respondeu · {formatarPct(nota)}</span>
                       ) : (
                         <span className="text-muted-foreground">Pendente</span>
                       )}

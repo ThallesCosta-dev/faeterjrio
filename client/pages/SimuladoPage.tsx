@@ -14,7 +14,7 @@ import { BarraTopico } from "@/components/simulado/BarraTopico";
 import { cn } from "@/lib/utils";
 import { markdownParaHtml } from "@/lib/markdown";
 import { SimuladoErro, chamarSimulado, comRetentativa } from "@/lib/simuladoApi";
-import { ALTERNATIVAS, type ResultadoAluno, type SimuladoQuestaoPublica } from "@shared/simulado";
+import { ALTERNATIVAS, formatarPct, type ResultadoAluno, type SimuladoQuestaoPublica } from "@shared/simulado";
 
 interface Info {
   titulo: string;
@@ -164,7 +164,10 @@ export default function SimuladoPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-  }, [idx]);
+    document
+      .querySelector('nav[aria-label="Questões"] [aria-current="true"]')
+      ?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [idx, etapa]);
 
   const enviar = async () => {
     setConfirmarEnvio(false);
@@ -316,14 +319,17 @@ export default function SimuladoPage() {
               <p className="text-sm bg-destructive/10 text-destructive rounded-md p-3">{erro}</p>
             )}
 
-            <nav className="flex flex-wrap gap-1.5" aria-label="Questões">
+            <nav
+              className="flex gap-1.5 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible"
+              aria-label="Questões"
+            >
               {questoes.map((q, i) => (
                 <button
                   key={q.key}
                   onClick={() => setIdx(i)}
                   aria-current={i === idx}
                   className={cn(
-                    "w-9 h-9 rounded-md text-xs font-bold border transition-colors",
+                    "shrink-0 w-9 h-9 rounded-md text-xs font-bold border transition-colors",
                     i === idx
                       ? "bg-primary text-primary-foreground border-primary"
                       : q.anulada
@@ -492,7 +498,7 @@ function Resultado({
             <Numero valor={`${resultado.acertos}`} rotulo="acertos" />
             <Numero valor={`${resultado.total}`} rotulo="questões válidas" />
             <Numero
-              valor={`${Number(resultado.nota).toFixed(1)}%`}
+              valor={formatarPct(resultado.nota)}
               rotulo="aproveitamento"
               cor={resultado.nota >= 60 ? "text-green-600" : resultado.nota >= 40 ? "text-amber-600" : "text-red-600"}
             />
@@ -543,7 +549,9 @@ function Resultado({
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Questões que você errou ({resultado.erradas.length})</CardTitle>
             {resultado.erradas.some((e) => e.explicacao) && (
-              <p className="text-xs text-muted-foreground">Explicações geradas por IA a partir do gabarito oficial — na dúvida, confirme com o professor.</p>
+              <p className="text-xs text-muted-foreground">
+                Explicações baseadas no gabarito oficial; parte delas é gerada por IA — na dúvida, confirme com o professor.
+              </p>
             )}
           </CardHeader>
           <CardContent>
@@ -560,7 +568,7 @@ function Resultado({
                       {e.subtopico ? ` · ${e.subtopico}` : ""}
                     </p>
                     {e.explicacao && (
-                      <p className="text-xs mt-1.5 text-foreground/80 bg-muted/60 rounded p-2">
+                      <p className="text-xs mt-1.5 text-foreground/80 bg-muted/60 rounded p-2 whitespace-pre-line">
                         <span className="font-semibold">Por que {e.correta}:</span> {e.explicacao}
                       </p>
                     )}

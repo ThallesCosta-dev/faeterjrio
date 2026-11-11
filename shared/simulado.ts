@@ -102,6 +102,9 @@ export interface ResultadoAluno {
   ai_feedback: string | null;
 }
 
+export const formatarPct = (n: number) =>
+  `${Number(n).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+
 export function topicoDe(
   q: Pick<SimuladoQuestao, "key" | "area">,
   topicos: Record<string, QuestaoTopico>,
